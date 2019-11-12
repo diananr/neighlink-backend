@@ -1,33 +1,41 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Neighlink.Entity;
+using Neighlink.Repository.Context;
 
-namespace Neighlink.Service.implementation
+namespace Neighlink.Service.Implementation
 {
     public class CondominiumService : ICondominiumService
     {
-        public bool Delete(int id)
+        private ApplicationDbContext dbContext;
+
+        public CondominiumService(ApplicationDbContext dbContext)
         {
-            throw new System.NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public Condominium Get(int id)
+        public List<Condominium> GetAllCondosForUser(int userId)
         {
-            throw new System.NotImplementedException();
+            var roles = dbContext.Roles.Where(x => x.Users.Select(y => y.Id).Contains(userId));
+            List<Condominium> result = new List<Condominium>();
+            foreach (var role in roles) 
+            {
+                var condominiumsForRole = dbContext.Condominiums.Where(x => x.Roles.Select(y => y.Id).Contains(role.Id));
+                result.AddRange(condominiumsForRole);
+            }
+
+            return result;
         }
 
-        public IEnumerable<Condominium> GetAll()
+        public int SaveNewCondominium(Condominium condominium)
         {
-            throw new System.NotImplementedException();
-        }
+            dbContext.Condominiums.Add(condominium);
+            dbContext.SaveChanges();
 
-        public bool Save(Condominium entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(Condominium entity)
-        {
-            throw new System.NotImplementedException();
+            return condominium.Id;
         }
     }
 }
