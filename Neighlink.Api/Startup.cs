@@ -37,6 +37,7 @@ namespace Neighlink.Api
             services.AddTransient<ICondominiumService, CondominiumService>();
             services.AddTransient<IPlanService, PlanService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IBuildingService, BuildingService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

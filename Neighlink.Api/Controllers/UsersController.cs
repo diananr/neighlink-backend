@@ -21,9 +21,9 @@ namespace Neighlink.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserInformation>> Get()
+        public ActionResult<IEnumerable<UserInformation>> Get(int id)
         {
-            return userService.GetAllUserForAdministrator(2);
+            return userService.GetAllUserForAdministrator(id);
         }
 
         [HttpPost]
