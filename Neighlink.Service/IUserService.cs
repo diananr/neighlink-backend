@@ -10,5 +10,9 @@ namespace Neighlink.Service
         List<UserInformation> GetAllUserForAdministrator(int userId);
 
         int SaveNewUser(User user);
+
+        int SaveNewUser(User user, int RoleId);
+
+        int SaveNewDefaultCondoUser(User user, int condominiumId);
     }
 }
