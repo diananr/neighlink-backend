@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Neighlink.Api.Contracts;
 using Neighlink.Entity;
+using Neighlink.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +13,17 @@ namespace Neighlink.Api.Controllers
     [ApiController]
     public class CondominiumController : ControllerBase
     {
+        private ICondominiumService condominiumService;
 
+        public CondominiumController(ICondominiumService condominiumService)
+        {
+            this.condominiumService = condominiumService;
+        }
 
         [HttpPost]
-        public ActionResult<int> Post([FromBody] Condominium condo)
+        public ActionResult<int> Post([FromBody] CreateCondominiumRequest request)
         {
-            return userService.SaveNewUser(user);
+            return condominiumService.SaveNewCondominium(request.Condominium, request.PlanId);
         }
     }
 }

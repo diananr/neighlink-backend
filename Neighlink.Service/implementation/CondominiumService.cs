@@ -30,10 +30,20 @@ namespace Neighlink.Service.Implementation
             return result;
         }
 
-        public int SaveNewCondominium(Condominium condominium)
+        public int SaveNewCondominium(Condominium condominium, int planId)
         {
-            dbContext.Condominiums.Add(condominium);
-            dbContext.SaveChanges();
+            var existingPlan = dbContext.Plans.Include(y => y.Condominiums).Where(x => x.Id == planId).FirstOrDefault();
+
+            if (existingPlan != null) 
+            {
+                if (existingPlan.Condominiums == null) 
+                {
+                    existingPlan.Condominiums = new List<Condominium>();
+                }
+
+                existingPlan.Condominiums.Add(condominium);
+                dbContext.SaveChanges();
+            }
 
             return condominium.Id;
         }

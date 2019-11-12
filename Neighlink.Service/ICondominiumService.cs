@@ -9,6 +9,6 @@ namespace Neighlink.Service
     {
         List<Condominium> GetAllCondosForUser(int userId);
 
-        int SaveNewCondominium(Condominium condominium);
+        int SaveNewCondominium(Condominium condominium, int planId);
     }
 }

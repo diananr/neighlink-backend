@@ -34,6 +34,8 @@ namespace Neighlink.Api
             options.UseSqlServer(Configuration.GetConnectionString("NeighlinkDBConnection")));
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICondominiumService, CondominiumService>();
+            services.AddTransient<IPlanService, PlanService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

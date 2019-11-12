@@ -5,7 +5,6 @@ namespace Neighlink.Entity.Entity
         Administrator,
         President,
         Treasurer,
-        Owner,
-        Basic
+        Owner
     }
 }
