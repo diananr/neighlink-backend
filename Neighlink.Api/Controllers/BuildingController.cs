@@ -6,35 +6,35 @@ namespace Neighlink.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleController:ControllerBase
+    public class BuildingController:ControllerBase
     {
-    private IRoleService roleService;
-    public RoleController(IRoleService roleService)
+    private IBuildingService buildingService;
+    public BuildingController(IBuildingService buildingService)
     {
-        this.roleService = roleService;
+        this.buildingService = buildingService;
     }
-    
-        [HttpGet]
+
+     [HttpGet]
         public ActionResult Get()
         {
             return Ok(
-                roleService.GetAll()
+                buildingService.GetAll()
             );
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Role role)
+        public ActionResult Post([FromBody] Building building)
         {
             return Ok(
-                roleService.Save(role)
+                buildingService.Save(building)
             );
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody] Role role)
+        public ActionResult Put([FromBody] Building building)
         {
             return Ok(
-                roleService.Update(role)
+                buildingService.Update(building)
             );
         }
 
@@ -42,8 +42,11 @@ namespace Neighlink.Api.Controllers
         public ActionResult Delete(int id)
         {
             return Ok(
-                roleService.Delete(id)
+                buildingService.Delete(id)
             );
         }
+
+
+
     }
 }
