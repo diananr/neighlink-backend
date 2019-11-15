@@ -1,33 +1,39 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
+using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
     public class RoleService : IRoleService
     {
+        private IRoleRepository roleRepository;
+        public RoleService(IRoleRepository roleRepository)
+        {
+            this.roleRepository=roleRepository;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return roleRepository.Delete(id);
         }
 
         public Role Get(int id)
         {
-            throw new System.NotImplementedException();
+            return roleRepository.Get(id);
         }
 
         public IEnumerable<Role> GetAll()
         {
-            throw new System.NotImplementedException();
+            return roleRepository.GetAll();
         }
 
         public bool Save(Role entity)
         {
-            throw new System.NotImplementedException();
+            return roleRepository.Save(entity);
         }
 
         public bool Update(Role entity)
         {
-            throw new System.NotImplementedException();
+            return roleRepository.Update(entity);
         }
     }
 }

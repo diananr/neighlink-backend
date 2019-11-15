@@ -10,22 +10,22 @@ namespace Neighlink.Repository.implementation
             throw new System.NotImplementedException();
         }
 
-        public New Get(int id)
+        public News Get(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<New> GetAll()
+        public IEnumerable<News> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Save(New entity)
+        public bool Save(News entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Update(New entity)
+        public bool Update(News entity)
         {
             throw new System.NotImplementedException();
         }

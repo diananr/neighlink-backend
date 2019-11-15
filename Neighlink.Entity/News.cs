@@ -2,7 +2,7 @@ using System;
 
 namespace Neighlink.Entity
 {
-    public class New:BaseEntity
+    public class News:BaseEntity
     {
         public string Title { get; set; }
         public string Description { get; set; }

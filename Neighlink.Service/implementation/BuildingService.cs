@@ -1,33 +1,39 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
+using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
     public class BuildingService : IBuildingService
     {
+        private IBuildingRepository buildingRepository;
+        public BuildingService(IBuildingRepository buildingRepository)
+        {
+            this.buildingRepository=buildingRepository;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return buildingRepository.Delete(id);
         }
 
         public Building Get(int id)
         {
-            throw new System.NotImplementedException();
+            return buildingRepository.Get(id);
         }
 
         public IEnumerable<Building> GetAll()
         {
-            throw new System.NotImplementedException();
+            return buildingRepository.GetAll();
         }
 
         public bool Save(Building entity)
         {
-            throw new System.NotImplementedException();
+            return buildingRepository.Save(entity);
         }
 
         public bool Update(Building entity)
         {
-            throw new System.NotImplementedException();
+            return buildingRepository.Update(entity);
         }
     }
 }

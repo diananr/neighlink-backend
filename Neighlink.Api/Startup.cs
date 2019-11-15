@@ -32,7 +32,7 @@ namespace Neighlink.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaulConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddTransient<IBillRepository,BillRepository>();
             services.AddTransient<IBillService,BillService>();

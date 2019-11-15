@@ -1,33 +1,90 @@
 using System.Collections.Generic;
+using System.Linq;
 using Neighlink.Entity;
+using Neighlink.Repository.Context;
 
 namespace Neighlink.Repository.implementation
 {
     public class BuildingRepository : IBuildingRepository
     {
+        private ApplicationDbContext context;
+        public BuildingRepository(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+           try
+            {
+                var result = new Building();
+                result = context.buildings.Single(x => x.Id == id);
+                context.Remove(result);
+                context.SaveChanges();
+                return true;
+            }
+            catch(System.Exception)
+            {
+            throw;
+            }
         }
 
         public Building Get(int id)
         {
-            throw new System.NotImplementedException();
+            var result = new Building();
+            try{
+                result = context.buildings.Single(x =>x.Id == id);
+            }catch(System.Exception)
+            {
+                throw;
+            }
+            return result;
         }
 
         public IEnumerable<Building> GetAll()
         {
-            throw new System.NotImplementedException();
+             var result = new List<Building>();
+            try
+            {
+                result = context.buildings.ToList();
+            }catch(System.Exception)
+            {
+                throw;
+            }
+            return result;
         }
 
         public bool Save(Building entity)
         {
-            throw new System.NotImplementedException();
+            try{
+                context.Add(entity);
+                context.SaveChanges();
+            }
+            catch(System.Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool Update(Building entity)
         {
-            throw new System.NotImplementedException();
+            try{
+                var buildingOrigin = context.buildings.Single(
+                    x=> x.Id == entity.Id
+                );
+
+                buildingOrigin.Id = entity.Id;
+                buildingOrigin.Name = entity.Name;
+                buildingOrigin.Status = entity.Status;
+                buildingOrigin.Description = entity.Description;
+                context.Update(buildingOrigin);
+                context.SaveChanges();
+            }
+            catch(System.Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

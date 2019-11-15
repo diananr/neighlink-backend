@@ -1,33 +1,39 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
+using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
     public class PaymentCategoryService : IPaymentCategoryService
     {
+        private IPaymentCategoryRepository paymentRepository;
+        public PaymentCategoryService(IPaymentCategoryRepository paymentRepository)
+        {
+            this.paymentRepository=paymentRepository;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return paymentRepository.Delete(id);
         }
 
         public PaymentCategory Get(int id)
         {
-            throw new System.NotImplementedException();
+            return paymentRepository.Get(id);
         }
 
         public IEnumerable<PaymentCategory> GetAll()
         {
-            throw new System.NotImplementedException();
+            return paymentRepository.GetAll();
         }
 
         public bool Save(PaymentCategory entity)
         {
-            throw new System.NotImplementedException();
+            return paymentRepository.Save(entity);
         }
 
         public bool Update(PaymentCategory entity)
         {
-            throw new System.NotImplementedException();
+            return paymentRepository.Update(entity);
         }
     }
 }
