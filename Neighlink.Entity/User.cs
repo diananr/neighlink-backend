@@ -14,9 +14,7 @@ namespace Neighlink.Entity
         public byte[] SaltedAndHashedPassword { get; set; }
         
         ////////////////////////////////////////////FK
-        public int BuildingId { get; set; }
         public Building building {get;set;}
-        public int RoleId {get;set;}
         public Role role {get;set;}
     }
 }

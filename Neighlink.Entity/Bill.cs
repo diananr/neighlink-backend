@@ -11,9 +11,7 @@ namespace Neighlink.Entity
         public DateTime EndDate { get; set; } = new DateTime(2019, 08, 25);
 
         ////////////////////////////////////////////FK
-        public int BuildingId { get; set; }
         public Building building {get;set;}
-        public int PaymentCategoryId { get; set; }
         public PaymentCategory paymentCategory{get;set;}
     }
 }

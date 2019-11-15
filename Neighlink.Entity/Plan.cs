@@ -10,8 +10,6 @@ namespace Neighlink.Entity
         public int NumberOfHomes { get; set; }
         public PlanType Type { get; set; }
         ////////////////////////////////////////////FK
-
-        public int CondominiumId {get;set;}
         public Condominium condominium {get;set;}
     }
 }
