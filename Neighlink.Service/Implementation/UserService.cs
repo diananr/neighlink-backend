@@ -40,6 +40,16 @@ namespace Neighlink.Service.Implementation
             throw new NotImplementedException();
         }
 
+        public bool RegisterAdmin(User user, int condominiumId)
+        {
+            return userRepository.RegisterAdmin(user, condominiumId);
+        }
+
+        public bool RegisterOwner(User user, int buildingId)
+        {
+            return userRepository.RegisterOwner(user, buildingId);
+        }
+
         public bool Save(User entity)
         {
             return userRepository.Save(entity);

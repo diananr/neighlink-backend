@@ -8,5 +8,7 @@ namespace Neighlink.Service
     public interface IUserService : ICrudService<User>
     {
         User Authenticate(string email, string password);
+        bool RegisterOwner(User user, int buildingId);
+        bool RegisterAdmin(User user, int condominiumId);
     }
 }

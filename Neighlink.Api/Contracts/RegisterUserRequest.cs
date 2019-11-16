@@ -15,5 +15,8 @@ namespace Neighlink.Api.Contracts
         public Gender Gender { get; set; }
         public string PhoneNumber { get; set; }
         public string PhotoUrl { get; set; }
+        public Role Role { get; set; }
+        public int BuildingId { get; set; }
+        public int CondominiumId { get; set; }
     }
 }

@@ -16,9 +16,12 @@ namespace Neighlink.Api.Controllers
     public class UserController : ControllerBase
     {
         private IUserService userService;
-        public UserController(IUserService userService)
+        private IBuildingService buildingService;
+
+        public UserController(IUserService userService, IBuildingService buildingService)
         {
             this.userService = userService;
+            this.buildingService = buildingService;
         }
 
         [HttpGet]
@@ -53,10 +56,23 @@ namespace Neighlink.Api.Controllers
                 Gender = request.Gender,
                 PhoneNumber = request.PhoneNumber,
                 SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
-                PhotoUrl = request.PhotoUrl
+                PhotoUrl = request.PhotoUrl,
+                Role = request.Role,
             };
 
-            return Ok(userService.Save(user));
+            bool saveUser = false;
+
+            if (request.Role == Entity.Entity.Role.Administrator) 
+            {
+                saveUser = userService.RegisterAdmin(user, request.CondominiumId);
+            }
+
+            if (request.Role == Entity.Entity.Role.Owner)
+            {
+                saveUser = userService.RegisterAdmin(user, request.BuildingId);
+            }
+
+            return Ok(saveUser);
         }
 
         [HttpPut]

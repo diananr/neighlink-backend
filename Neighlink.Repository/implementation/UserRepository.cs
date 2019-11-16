@@ -35,7 +35,7 @@ namespace Neighlink.Repository.implementation
 
             // El password no era correcto
             if (!CustomLoginProviderUtils.SlowEquals(incoming, user.SaltedAndHashedPassword))
-                return null;    
+                return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(settings.AuthenticationSecret);
@@ -78,6 +78,36 @@ namespace Neighlink.Repository.implementation
             try
             {
                 context.Add(entity);
+                context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool RegisterOwner(User user, int buildingId) 
+        {
+            try
+            {
+                var matchingBuilding = context.Buildings.Where(x => x.Id == buildingId).FirstOrDefault();
+                matchingBuilding.Users.Add(user);
+                context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool RegisterAdmin(User user, int condominiumId)
+        {
+            try
+            {
+                var matchingCondo = context.Condominiums.Where(x => x.Id == condominiumId).FirstOrDefault();
+                matchingCondo.Users.Add(user);
                 context.SaveChanges();
             }
             catch (System.Exception)
