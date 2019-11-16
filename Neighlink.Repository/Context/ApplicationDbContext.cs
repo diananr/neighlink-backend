@@ -15,11 +15,16 @@ namespace Neighlink.Repository.Context
         public DbSet<Condominium> Condominiums { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<PaymentCategory> Paymentcategorys { get; set; }
+        public DbSet<PaymentCategory> PaymentCategories { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Option> Options { get; set; }
-        public DbSet<News> News { get; set; } 
+        public DbSet<News> News { get; set; }
+
+        public ApplicationDbContext(DbContextOptions options):base(options)
+        {
+
+        }
 
         public override int SaveChanges()
         {
