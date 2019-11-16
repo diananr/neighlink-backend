@@ -12,8 +12,7 @@ namespace Neighlink.Entity
         public string PhotoUrl { get; set; }
         public byte[] Salt { get; set; }
         public byte[] SaltedAndHashedPassword { get; set; }
-        
-        ////////////////////////////////////////////FK
+        public string SecurityToken { get; set; }
         public Building building {get;set;}
         public Role role {get;set;}
     }

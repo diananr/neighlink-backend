@@ -6,6 +6,7 @@ namespace Neighlink.Repository.Context
 {
     public class ApplicationDbContext :DbContext
     {
+        //Esto deberia de tener el nombre con mayuscula. Es una propiedad.
         public DbSet<Building> buildings { get; set; }
         public DbSet<Condominium> condominiums { get; set; }
         public DbSet<Plan> plans { get; set; }

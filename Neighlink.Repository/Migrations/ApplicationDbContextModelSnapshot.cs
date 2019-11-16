@@ -329,6 +329,8 @@ namespace Neighlink.Repository.Migrations
 
                     b.Property<bool>("Status");
 
+                    b.Property<string>("SecurityToken");
+
                     b.Property<DateTime?>("UpdatedAt");
 
                     b.Property<int?>("buildingId");

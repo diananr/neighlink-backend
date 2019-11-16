@@ -8,11 +8,11 @@ namespace Neighlink.Api.Controllers
     [ApiController]
     public class RoleController:ControllerBase
     {
-    private IRoleService roleService;
-    public RoleController(IRoleService roleService)
-    {
-        this.roleService = roleService;
-    }
+        private IRoleService roleService;
+        public RoleController(IRoleService roleService)
+        {
+            this.roleService = roleService;
+        }
     
         [HttpGet]
         public ActionResult Get()

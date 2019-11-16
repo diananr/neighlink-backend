@@ -172,6 +172,7 @@ namespace Neighlink.Repository.Migrations
                     Gender = table.Column<int>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhotoUrl = table.Column<string>(nullable: true),
+                    SecurityToken = table.Column<string>(nullable: true),
                     Salt = table.Column<byte[]>(nullable: true),
                     SaltedAndHashedPassword = table.Column<byte[]>(nullable: true),
                     buildingId = table.Column<int>(nullable: true),
