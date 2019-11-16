@@ -13,7 +13,6 @@ namespace Neighlink.Entity
         public byte[] Salt { get; set; }
         public byte[] SaltedAndHashedPassword { get; set; }
         public string SecurityToken { get; set; }
-        public Building building {get;set;}
-        public Role role {get;set;}
+        public Role Role {get;set;}
     }
 }

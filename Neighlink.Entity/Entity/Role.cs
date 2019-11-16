@@ -1,6 +1,6 @@
 namespace Neighlink.Entity.Entity
 {
-    public enum UserRole
+    public enum Role
     {
         Administrator,
         President,

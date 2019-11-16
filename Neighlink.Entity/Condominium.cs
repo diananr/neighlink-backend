@@ -1,5 +1,6 @@
 
 using Neighlink.Entity.Entity;
+using System.Collections.Generic;
 
 namespace Neighlink.Entity
 {
@@ -9,14 +10,10 @@ namespace Neighlink.Entity
         public string Address { get; set; }
         public string PhotoUrl { get; set; }
         public string SecretCode { get; set; }
-
-        ////////////////////////////////////////////FK
-        public Role role {get;set;}
-        public Poll poll {get;set;}
-        public Bill bill {get;set;}
-        public Building building {get;set;}
-        public PaymentCategory paymentCategory {get;set;}
-        public News news {get;set;}
-            
+        public virtual ICollection<User> Administrators { get; set; }
+        public virtual ICollection<Poll> Polls { get; set; }
+        public virtual ICollection<Building> Buildings { get; set; }
+        public virtual ICollection<PaymentCategory> PaymentCategories { get; set; }
+        public virtual ICollection<News> News { get; set; }            
     }
 }

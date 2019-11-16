@@ -88,9 +88,6 @@ namespace Neighlink.Api
             services.AddTransient<IPollRepository,PollRepository>();
             services.AddTransient<IPollService,PollService>();
 
-            services.AddTransient<IRoleRepository,RoleRepository>();
-            services.AddTransient<IRoleService,RoleService>();
-
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
 

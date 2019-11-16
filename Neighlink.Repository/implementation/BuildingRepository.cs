@@ -17,7 +17,7 @@ namespace Neighlink.Repository.implementation
            try
             {
                 var result = new Building();
-                result = context.buildings.Single(x => x.Id == id);
+                result = context.Buildings.Single(x => x.Id == id);
                 context.Remove(result);
                 context.SaveChanges();
                 return true;
@@ -32,7 +32,7 @@ namespace Neighlink.Repository.implementation
         {
             var result = new Building();
             try{
-                result = context.buildings.Single(x =>x.Id == id);
+                result = context.Buildings.Single(x =>x.Id == id);
             }catch(System.Exception)
             {
                 throw;
@@ -45,7 +45,7 @@ namespace Neighlink.Repository.implementation
              var result = new List<Building>();
             try
             {
-                result = context.buildings.ToList();
+                result = context.Buildings.ToList();
             }catch(System.Exception)
             {
                 throw;
@@ -69,7 +69,7 @@ namespace Neighlink.Repository.implementation
         public bool Update(Building entity)
         {
             try{
-                var buildingOrigin = context.buildings.Single(
+                var buildingOrigin = context.Buildings.Single(
                     x=> x.Id == entity.Id
                 );
 

@@ -42,7 +42,7 @@ namespace Neighlink.Api.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] RegisterUserRequest request)
         {
-            byte[] salt = CustomLoginProviderUtils.generateSalt();
+            byte[] salt = CustomLoginProviderUtils.GenerateSalt();
 
             User user = new User()
             {
@@ -52,7 +52,7 @@ namespace Neighlink.Api.Controllers
                 Salt = salt,
                 Gender = request.Gender,
                 PhoneNumber = request.PhoneNumber,
-                SaltedAndHashedPassword = CustomLoginProviderUtils.hash(request.Password, salt),
+                SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
                 PhotoUrl = request.PhotoUrl
             };
 

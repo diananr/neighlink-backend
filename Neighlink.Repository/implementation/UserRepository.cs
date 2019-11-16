@@ -24,17 +24,17 @@ namespace Neighlink.Repository.implementation
 
         public User Authenticate(string email, string password)
         {
-            var user = context.users.Where(x => x.Email == email).FirstOrDefault();
+            var user = context.Users.Where(x => x.Email == email).FirstOrDefault();
 
             // No encontramos el usuario
             if (user == null)
                 return null;
 
             byte[] incoming = CustomLoginProviderUtils
-                        .hash(password, user.Salt);
+                        .Hash(password, user.Salt);
 
             // El password no era correcto
-            if (!CustomLoginProviderUtils.slowEquals(incoming, user.SaltedAndHashedPassword))
+            if (!CustomLoginProviderUtils.SlowEquals(incoming, user.SaltedAndHashedPassword))
                 return null;    
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -75,8 +75,6 @@ namespace Neighlink.Repository.implementation
 
         public bool Save(User entity)
         {
-            
-
             try
             {
                 context.Add(entity);

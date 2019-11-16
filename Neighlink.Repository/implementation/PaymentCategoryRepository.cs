@@ -17,7 +17,7 @@ namespace Neighlink.Repository.implementation
             try
             {
                 var result = new PaymentCategory();
-                result = context.paymentcategorys.Single(x => x.Id == id);
+                result = context.Paymentcategorys.Single(x => x.Id == id);
                 context.Remove(result);
                 context.SaveChanges();
                 return true;
@@ -32,7 +32,7 @@ namespace Neighlink.Repository.implementation
         {
             var result = new PaymentCategory();
             try{
-                result = context.paymentcategorys.Single(x =>x.Id == id);
+                result = context.Paymentcategorys.Single(x =>x.Id == id);
             }catch(System.Exception)
             {
                 throw;
@@ -45,7 +45,7 @@ namespace Neighlink.Repository.implementation
             var result = new List<PaymentCategory>();
             try
             {
-                result = context.paymentcategorys.ToList();
+                result = context.Paymentcategorys.ToList();
             }catch(System.Exception)
             {
                 throw;
@@ -69,7 +69,7 @@ namespace Neighlink.Repository.implementation
         public bool Update(PaymentCategory entity)
         {
             try{
-                var paymentcategoryOrigin = context.paymentcategorys.Single(
+                var paymentcategoryOrigin = context.Paymentcategorys.Single(
                     x=> x.Id == entity.Id
                 );
 

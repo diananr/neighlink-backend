@@ -7,7 +7,7 @@ namespace Neighlink.Repository.Utilities
 {
     public static class CustomLoginProviderUtils
     {
-        public static byte[] hash(string plaintext, byte[] salt)
+        public static byte[] Hash(string plaintext, byte[] salt)
         {
             SHA512CryptoServiceProvider hashFunc = new SHA512CryptoServiceProvider();
             byte[] plainBytes = System.Text.Encoding.ASCII.GetBytes(plaintext);
@@ -17,7 +17,7 @@ namespace Neighlink.Repository.Utilities
             return hashFunc.ComputeHash(toHash);
         }
 
-        public static byte[] generateSalt()
+        public static byte[] GenerateSalt()
         {
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] salt = new byte[256];
@@ -25,7 +25,7 @@ namespace Neighlink.Repository.Utilities
             return salt;
         }
 
-        public static bool slowEquals(byte[] a, byte[] b)
+        public static bool SlowEquals(byte[] a, byte[] b)
         {
             int diff = a.Length ^ b.Length;
             for (int i = 0; i < a.Length && i < b.Length; i++)
