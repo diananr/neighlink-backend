@@ -10,7 +10,7 @@ using Neighlink.Repository.Context;
 namespace Neighlink.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191115033824_init")]
+    [Migration("20191115055714_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

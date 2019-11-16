@@ -60,6 +60,12 @@ namespace Neighlink.Repository.Context
             .HasColumnName("Descriptions")
             .HasMaxLength(30)
             .IsRequired();
+
+            modelBuilder.Entity<Condominium>()
+            .Property(p=>p.Name)
+            .HasColumnName("Names")
+            .HasMaxLength(20)
+            .IsRequired();
         }
     }
 }
