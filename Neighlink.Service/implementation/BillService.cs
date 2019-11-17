@@ -5,29 +5,35 @@ namespace Neighlink.Service.implementation
 {
     public class BillService : IBillService
     {
+        private IBillRepository buillRepository;
+
+        public BillService(IBillRepository buillRepository)
+        {
+            this.buillRepository=buillRepository;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return buillRepository.Delete(id);
         }
 
         public Bill Get(int id)
         {
-            throw new System.NotImplementedException();
+            return buillRepository.Get(id);
         }
 
         public IEnumerable<Bill> GetAll()
         {
-            throw new System.NotImplementedException();
+            return buillRepository.GetAll();
         }
 
         public bool Save(Bill entity)
         {
-            throw new System.NotImplementedException();
+            return buillRepository.Save(entity);
         }
 
         public bool Update(Bill entity)
         {
-            throw new System.NotImplementedException();
+            return buillRepository.Update(entity);
         }
     }
 }
