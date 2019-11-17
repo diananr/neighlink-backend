@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using Neighlink.Entity;
 using Neighlink.Repository.Context;
 using Neighlink.Repository.Utilities;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Neighlink.Repository.implementation
 {
@@ -26,14 +28,10 @@ namespace Neighlink.Repository.implementation
         {
             var user = context.Users.Where(x => x.Email == email).FirstOrDefault();
 
-            // No encontramos el usuario
-            if (user == null)
-                return null;
+            if (user == null) return null;
 
-            byte[] incoming = CustomLoginProviderUtils
-                        .Hash(password, user.Salt);
+            byte[] incoming = CustomLoginProviderUtils.Hash(password, user.Salt);
 
-            // El password no era correcto
             if (!CustomLoginProviderUtils.SlowEquals(incoming, user.SaltedAndHashedPassword))
                 return null;
 
@@ -51,40 +49,10 @@ namespace Neighlink.Repository.implementation
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.SecurityToken = tokenHandler.WriteToken(token);
 
-            //Quitar cosas sensibles
             user.SaltedAndHashedPassword = null;
             user.Salt = null;
 
             return user;
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Save(User entity)
-        {
-            try
-            {
-                context.Add(entity);
-                context.SaveChanges();
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
-            return true;
         }
 
         public bool RegisterOwner(User user, int buildingId) 
@@ -119,9 +87,81 @@ namespace Neighlink.Repository.implementation
             return true;
         }
 
+        public IEnumerable<User> GetUsersByCondominium(int condominiumId)
+        {
+            try
+            {
+                var buildings = context.Buildings.Include(x => x.Users).Where(y => y.CondominiumId == condominiumId);
+                var users = buildings.SelectMany(x => x.Users);
+                return users;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
+        public User Get(int id)
+        {
+            try
+            {
+                 var user = context.Users.Find(id);
+                 return user;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
         public bool Update(User entity)
+        {
+            try
+            {
+                var user = context.Users.Find(entity.Id);
+
+                user.Email = entity.Email;
+                user.FirstName = entity.FirstName;
+                user.LastName = entity.LastName;
+                user.Gender = entity.Gender;
+                user.PhoneNumber = entity.PhoneNumber;
+                user.PhotoUrl = entity.PhotoUrl;
+                user.Status = entity.Status;
+                user.BuildingId = entity.BuildingId;
+
+                context.SaveChanges();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var user = context.Users.Find(id);
+                context.Users.Remove(user);
+                context.SaveChanges();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Save(User entity)
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

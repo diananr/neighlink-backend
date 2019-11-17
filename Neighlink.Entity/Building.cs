@@ -9,6 +9,6 @@ namespace Neighlink.Entity
         public int NumberOfHomes { get; set; }
         public virtual ICollection<Bill> Bills { get; set; }
         public virtual ICollection<User> Users { get; set; }
-
+        public virtual int CondominiumId { get; set; }
     }
 }
