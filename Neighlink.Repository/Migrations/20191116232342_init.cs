@@ -9,26 +9,6 @@ namespace Neighlink.Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Condominiums",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    DeletedAt = table.Column<DateTime>(nullable: true),
-                    Status = table.Column<bool>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    PhotoUrl = table.Column<string>(nullable: true),
-                    SecretCode = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Condominiums", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Options",
                 columns: table => new
                 {
@@ -44,6 +24,52 @@ namespace Neighlink.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Options", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Plans",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    NumberOfHomes = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Plans", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Condominiums",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    PhotoUrl = table.Column<string>(nullable: true),
+                    SecretCode = table.Column<string>(nullable: true),
+                    PlanId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Condominiums", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Condominiums_Plans_PlanId",
+                        column: x => x.PlanId,
+                        principalTable: "Plans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,32 +144,6 @@ namespace Neighlink.Repository.Migrations
                     table.ForeignKey(
                         name: "FK_PaymentCategories_Condominiums_CondominiumId",
                         column: x => x.CondominiumId,
-                        principalTable: "Condominiums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Plans",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    DeletedAt = table.Column<DateTime>(nullable: true),
-                    Status = table.Column<bool>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    NumberOfHomes = table.Column<int>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
-                    condominiumId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Plans", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Plans_Condominiums_condominiumId",
-                        column: x => x.condominiumId,
                         principalTable: "Condominiums",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -267,6 +267,11 @@ namespace Neighlink.Repository.Migrations
                 column: "CondominiumId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Condominiums_PlanId",
+                table: "Condominiums",
+                column: "PlanId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_News_CondominiumId",
                 table: "News",
                 column: "CondominiumId");
@@ -275,11 +280,6 @@ namespace Neighlink.Repository.Migrations
                 name: "IX_PaymentCategories_CondominiumId",
                 table: "PaymentCategories",
                 column: "CondominiumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Plans_condominiumId",
-                table: "Plans",
-                column: "condominiumId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Polls_CondominiumId",
@@ -309,9 +309,6 @@ namespace Neighlink.Repository.Migrations
                 name: "Options");
 
             migrationBuilder.DropTable(
-                name: "Plans");
-
-            migrationBuilder.DropTable(
                 name: "Polls");
 
             migrationBuilder.DropTable(
@@ -325,6 +322,9 @@ namespace Neighlink.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Condominiums");
+
+            migrationBuilder.DropTable(
+                name: "Plans");
         }
     }
 }

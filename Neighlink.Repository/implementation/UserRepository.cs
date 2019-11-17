@@ -92,6 +92,7 @@ namespace Neighlink.Repository.implementation
             try
             {
                 var matchingBuilding = context.Buildings.Where(x => x.Id == buildingId).FirstOrDefault();
+                if(matchingBuilding.Users == null) matchingBuilding.Users = new List<User>();
                 matchingBuilding.Users.Add(user);
                 context.SaveChanges();
             }
@@ -107,7 +108,8 @@ namespace Neighlink.Repository.implementation
             try
             {
                 var matchingCondo = context.Condominiums.Where(x => x.Id == condominiumId).FirstOrDefault();
-                matchingCondo.Users.Add(user);
+                if(matchingCondo.Administrators == null) matchingCondo.Administrators = new List<User>();
+                matchingCondo.Administrators.Add(user);
                 context.SaveChanges();
             }
             catch (System.Exception)

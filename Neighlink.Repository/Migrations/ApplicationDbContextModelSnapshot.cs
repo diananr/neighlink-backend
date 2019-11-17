@@ -106,6 +106,8 @@ namespace Neighlink.Repository.Migrations
 
                     b.Property<string>("PhotoUrl");
 
+                    b.Property<int?>("PlanId");
+
                     b.Property<string>("SecretCode");
 
                     b.Property<bool>("Status");
@@ -113,6 +115,8 @@ namespace Neighlink.Repository.Migrations
                     b.Property<DateTime?>("UpdatedAt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PlanId");
 
                     b.ToTable("Condominiums");
                 });
@@ -253,11 +257,7 @@ namespace Neighlink.Repository.Migrations
 
                     b.Property<DateTime?>("UpdatedAt");
 
-                    b.Property<int?>("condominiumId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("condominiumId");
 
                     b.ToTable("Plans");
                 });
@@ -327,6 +327,13 @@ namespace Neighlink.Repository.Migrations
                         .HasForeignKey("CondominiumId");
                 });
 
+            modelBuilder.Entity("Neighlink.Entity.Condominium", b =>
+                {
+                    b.HasOne("Neighlink.Entity.Plan")
+                        .WithMany("Condominiums")
+                        .HasForeignKey("PlanId");
+                });
+
             modelBuilder.Entity("Neighlink.Entity.Entity.Poll", b =>
                 {
                     b.HasOne("Neighlink.Entity.Condominium")
@@ -346,13 +353,6 @@ namespace Neighlink.Repository.Migrations
                     b.HasOne("Neighlink.Entity.Condominium")
                         .WithMany("PaymentCategories")
                         .HasForeignKey("CondominiumId");
-                });
-
-            modelBuilder.Entity("Neighlink.Entity.Plan", b =>
-                {
-                    b.HasOne("Neighlink.Entity.Condominium", "condominium")
-                        .WithMany()
-                        .HasForeignKey("condominiumId");
                 });
 
             modelBuilder.Entity("Neighlink.Entity.User", b =>

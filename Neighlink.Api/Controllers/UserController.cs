@@ -69,7 +69,7 @@ namespace Neighlink.Api.Controllers
 
             if (request.Role == Entity.Entity.Role.Owner)
             {
-                saveUser = userService.RegisterAdmin(user, request.BuildingId);
+                saveUser = userService.RegisterOwner(user, request.BuildingId);
             }
 
             return Ok(saveUser);
