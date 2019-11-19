@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Neighlink.Entity;
 using Neighlink.Repository.Context;
 
@@ -86,5 +87,19 @@ namespace Neighlink.Repository.implementation
             }
             return true;
         }
+
+        public IEnumerable<Building> GetBuildingsByCondominium(int condominiumId)
+        {
+            try
+            {
+                var buildings = context.Buildings.Where(x => x.CondominiumId == condominiumId);
+                return buildings;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
     }
 }

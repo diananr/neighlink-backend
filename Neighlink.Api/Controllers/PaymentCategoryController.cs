@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Neighlink.Entity;
 using Neighlink.Service;
@@ -47,6 +48,10 @@ namespace Neighlink.Api.Controllers
             );
         }
 
-
+        [HttpGet("by-condominium/{condominiumId}")]
+        public ActionResult<IEnumerable<User>> GetBuildings(int condominiumId)
+        {
+            return Ok(paymentCategoryService.GetBuildingsByCondominium(condominiumId));
+        }
     }
 }
