@@ -20,26 +20,6 @@ namespace Neighlink.Service.Implementation
             return userRepository.Authenticate(email, password);
         }
 
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public User Login(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool RegisterAdmin(User user, int condominiumId)
         {
             return userRepository.RegisterAdmin(user, condominiumId);
@@ -50,12 +30,32 @@ namespace Neighlink.Service.Implementation
             return userRepository.RegisterOwner(user, buildingId);
         }
 
-        public bool Save(User entity)
+        public IEnumerable<User> GetUsersByCondominium(int condominiumId)
         {
-            return userRepository.Save(entity);
+            return userRepository.GetUsersByCondominium(condominiumId);
+        }
+
+        public User Get(int id)
+        {
+            return userRepository.Get(id);
         }
 
         public bool Update(User entity)
+        {
+            return userRepository.Update(entity);
+        }
+
+        public bool Delete(int id)
+        {
+            return userRepository.Delete(id);
+        }
+
+        public bool Save(User entity)
+        {
+           throw new NotImplementedException();
+        }
+
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }

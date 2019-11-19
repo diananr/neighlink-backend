@@ -35,5 +35,10 @@ namespace Neighlink.Service.implementation
         {
             return buildingRepository.Update(entity);
         }
+
+        public IEnumerable<Building> GetBuildingsByCondominium(int condominiumId)
+        {
+            return buildingRepository.GetBuildingsByCondominium(condominiumId);
+        }
     }
 }

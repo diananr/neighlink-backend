@@ -24,12 +24,6 @@ namespace Neighlink.Api.Controllers
             this.buildingService = buildingService;
         }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return Ok(userService.GetAll());
-        }
-
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]LoginRequest loginRequest)
@@ -73,6 +67,18 @@ namespace Neighlink.Api.Controllers
             }
 
             return Ok(saveUser);
+        }
+
+        [HttpGet("by-condominium/{condominiumId}")]
+        public ActionResult<IEnumerable<User>> GetUsers(int condominiumId)
+        {
+            return Ok(userService.GetUsersByCondominium(condominiumId));
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<User> Get(int id)
+        {
+            return Ok(userService.Get(id));
         }
 
         [HttpPut]
