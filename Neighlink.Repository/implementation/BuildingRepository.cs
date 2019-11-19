@@ -69,10 +69,7 @@ namespace Neighlink.Repository.implementation
         public bool Update(Building entity)
         {
             try{
-                var buildingOrigin = context.Buildings.Single(
-                    x=> x.Id == entity.Id
-                );
-
+                var buildingOrigin = context.Buildings.Single(x=> x.Id == entity.Id);
                 buildingOrigin.Id = entity.Id;
                 buildingOrigin.Name = entity.Name;
                 buildingOrigin.Status = entity.Status;
@@ -85,6 +82,19 @@ namespace Neighlink.Repository.implementation
                 return false;
             }
             return true;
+        }
+
+        public IEnumerable<Building> GetBuildingsByCondominium(int condominiumId)
+        {
+            try
+            {
+                var buildings = context.Buildings.Where(x => x.CondominiumId == condominiumId);
+                return buildings;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
     }
 }
