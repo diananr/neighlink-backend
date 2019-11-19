@@ -5,7 +5,7 @@ namespace Neighlink.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual int CondominiumId { get; set; }
-                                   
-        //public virtual Condominium condominium { get; set; }
+                              
+        
      }
 }

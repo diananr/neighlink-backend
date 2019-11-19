@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Neighlink.Entity.Entity;
 
 namespace Neighlink.Entity
@@ -15,5 +16,7 @@ namespace Neighlink.Entity
         public string SecurityToken { get; set; }
         public Role Role {get;set;}
         public int? BuildingId {get;set;}
+
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }

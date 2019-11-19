@@ -5,6 +5,6 @@ namespace Neighlink.Repository
 {
     public interface IPaymentCategoryRepository:ICrudRepository<PaymentCategory>
     {
-         IEnumerable<Building> GetBuildingsByCondominium(int condominiumId);
+         IEnumerable<PaymentCategory> GetBuildingsByCondominium(int condominiumId);
     }
 }

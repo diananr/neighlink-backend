@@ -88,12 +88,12 @@ namespace Neighlink.Repository.implementation
             return true;
         }
 
-        public IEnumerable<Building> GetBuildingsByCondominium(int condominiumId)
+        public IEnumerable<PaymentCategory> GetBuildingsByCondominium(int condominiumId)
         {
             try
             {
-                var buildings = context.Buildings.Where(x => x.CondominiumId == condominiumId);
-                return buildings;
+                var paymentCategories = context.PaymentCategories.Where(x => x.CondominiumId == condominiumId);
+                return paymentCategories;
             }
             catch (System.Exception)
             {

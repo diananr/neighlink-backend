@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Neighlink.Entity
 {
@@ -10,5 +11,6 @@ namespace Neighlink.Entity
         public DateTime StartDate { get; set; } = new DateTime(2019, 08, 25);
         public DateTime EndDate { get; set; } = new DateTime(2019, 08, 25);
         public PaymentCategory PaymentCategory{get;set;}
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }
