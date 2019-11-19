@@ -37,5 +37,9 @@ namespace Neighlink.Service.implementation
         {
             return newRepository.Update(entity);
         }
+        public IEnumerable<News> GetNewsByCondominium(int condominiumId)
+        {
+            return newRepository.GetNewsByCondominium(condominiumId);
+        }
     }
 }

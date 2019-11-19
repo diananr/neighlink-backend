@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Neighlink.Entity;
 using Neighlink.Service;
+using System.Collections.Generic;
 
 namespace Neighlink.Api.Controllers
 {
@@ -46,6 +47,11 @@ namespace Neighlink.Api.Controllers
             );
         }
 
+        [HttpGet("by-condominium/{condominiumId}")]
+        public ActionResult<IEnumerable<News>> GetNews(int condominiumId)
+        {
+            return Ok(newService.GetNewsByCondominium(condominiumId));
+        }
 
         
         

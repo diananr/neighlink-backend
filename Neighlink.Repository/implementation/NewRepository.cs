@@ -62,7 +62,7 @@ namespace Neighlink.Repository.implementation
             {
                 return false;
             }
-            return false;
+            return true;
         }
 
         public bool Update(News entity)
@@ -82,6 +82,18 @@ namespace Neighlink.Repository.implementation
                 return false;
             }
             return false;
+        }
+        public IEnumerable<News> GetNewsByCondominium(int condominiumId)
+        {
+            try
+            {
+                var news = context.News.Where(x => x.CondominiumId == condominiumId);
+                return news;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
     }
 }
