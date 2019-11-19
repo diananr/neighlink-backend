@@ -1,33 +1,41 @@
+using System;
 using System.Collections.Generic;
+using System.Text;
 using Neighlink.Entity;
+using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
     public class NewService : INewService
     {
+        private INewRepository newRepository;
+        public NewService(INewRepository newRepository)
+        {
+            this.newRepository=newRepository;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return newRepository.Delete(id);
         }
 
         public News Get(int id)
         {
-            throw new System.NotImplementedException();
+            return newRepository.Get(id);
         }
 
         public IEnumerable<News> GetAll()
         {
-            throw new System.NotImplementedException();
+            return newRepository.GetAll();
         }
 
         public bool Save(News entity)
         {
-            throw new System.NotImplementedException();
+            return newRepository.Save(entity);
         }
 
         public bool Update(News entity)
         {
-            throw new System.NotImplementedException();
+            return newRepository.Update(entity);
         }
     }
 }
