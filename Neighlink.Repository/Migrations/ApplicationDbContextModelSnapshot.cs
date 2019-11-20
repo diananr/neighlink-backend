@@ -62,7 +62,7 @@ namespace Neighlink.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CondominiumId");
+                    b.Property<int>("CondominiumId");
 
                     b.Property<DateTime?>("CreatedAt");
 
@@ -204,13 +204,46 @@ namespace Neighlink.Repository.Migrations
                     b.ToTable("Options");
                 });
 
+            modelBuilder.Entity("Neighlink.Entity.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount");
+
+                    b.Property<int>("BillId");
+
+                    b.Property<DateTime?>("CreatedAt");
+
+                    b.Property<DateTime?>("DeletedAt");
+
+                    b.Property<DateTime>("PaymentDate");
+
+                    b.Property<string>("Photo");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Neighlink.Entity.PaymentCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CondominiumId");
+                    b.Property<int>("CondominiumId");
 
                     b.Property<DateTime?>("CreatedAt");
 
@@ -315,8 +348,8 @@ namespace Neighlink.Repository.Migrations
                         .WithMany("Bills")
                         .HasForeignKey("BuildingId");
 
-                    b.HasOne("Neighlink.Entity.PaymentCategory", "PaymentCategory")
-                        .WithMany()
+                    b.HasOne("Neighlink.Entity.PaymentCategory")
+                        .WithMany("Bills")
                         .HasForeignKey("PaymentCategoryId");
                 });
 
@@ -324,7 +357,8 @@ namespace Neighlink.Repository.Migrations
                 {
                     b.HasOne("Neighlink.Entity.Condominium")
                         .WithMany("Buildings")
-                        .HasForeignKey("CondominiumId");
+                        .HasForeignKey("CondominiumId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Neighlink.Entity.Condominium", b =>
@@ -348,11 +382,25 @@ namespace Neighlink.Repository.Migrations
                         .HasForeignKey("CondominiumId");
                 });
 
+            modelBuilder.Entity("Neighlink.Entity.Payment", b =>
+                {
+                    b.HasOne("Neighlink.Entity.Bill")
+                        .WithMany("Payment")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Neighlink.Entity.User")
+                        .WithMany("Payment")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Neighlink.Entity.PaymentCategory", b =>
                 {
                     b.HasOne("Neighlink.Entity.Condominium")
                         .WithMany("PaymentCategories")
-                        .HasForeignKey("CondominiumId");
+                        .HasForeignKey("CondominiumId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Neighlink.Entity.User", b =>

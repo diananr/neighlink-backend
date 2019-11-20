@@ -10,7 +10,12 @@ namespace Neighlink.Entity
         public float Amount { get; set; }
         public DateTime StartDate { get; set; } = new DateTime(2019, 08, 25);
         public DateTime EndDate { get; set; } = new DateTime(2019, 08, 25);
-        public PaymentCategory PaymentCategory{get;set;}
-        public virtual ICollection<Payment> Payment { get; set; }
+        
+        /////////////////////////////////////////////////////////////////////////////////RELACIONES
+        
+         public virtual int? PaymentCategoryId { get; set; }
+         public virtual int? BuildingId { get; set; }
+
+         public virtual ICollection<Payment> Payment { get; set; }
     }
 }

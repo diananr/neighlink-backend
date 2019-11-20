@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Neighlink.Repository.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,7 +85,7 @@ namespace Neighlink.Repository.Migrations
                     Description = table.Column<string>(nullable: true),
                     Names = table.Column<string>(maxLength: 50, nullable: false),
                     NumberOfHomes = table.Column<int>(maxLength: 4, nullable: false),
-                    CondominiumId = table.Column<int>(nullable: true)
+                    CondominiumId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,7 +95,7 @@ namespace Neighlink.Repository.Migrations
                         column: x => x.CondominiumId,
                         principalTable: "Condominiums",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,7 +136,7 @@ namespace Neighlink.Repository.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Names = table.Column<string>(maxLength: 20, nullable: false),
                     Descriptions = table.Column<string>(maxLength: 30, nullable: false),
-                    CondominiumId = table.Column<int>(nullable: true)
+                    CondominiumId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,7 +146,7 @@ namespace Neighlink.Repository.Migrations
                         column: x => x.CondominiumId,
                         principalTable: "Condominiums",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -251,6 +251,39 @@ namespace Neighlink.Repository.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Amount = table.Column<int>(nullable: false),
+                    PaymentDate = table.Column<DateTime>(nullable: false),
+                    Photo = table.Column<string>(nullable: true),
+                    BillId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Bills_BillId",
+                        column: x => x.BillId,
+                        principalTable: "Bills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bills_BuildingId",
                 table: "Bills",
@@ -282,6 +315,16 @@ namespace Neighlink.Repository.Migrations
                 column: "CondominiumId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_BillId",
+                table: "Payments",
+                column: "BillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_UserId",
+                table: "Payments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Polls_CondominiumId",
                 table: "Polls",
                 column: "CondominiumId");
@@ -300,16 +343,19 @@ namespace Neighlink.Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bills");
-
-            migrationBuilder.DropTable(
                 name: "News");
 
             migrationBuilder.DropTable(
                 name: "Options");
 
             migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
                 name: "Polls");
+
+            migrationBuilder.DropTable(
+                name: "Bills");
 
             migrationBuilder.DropTable(
                 name: "Users");
