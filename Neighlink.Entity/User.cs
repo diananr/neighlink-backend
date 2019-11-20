@@ -5,8 +5,8 @@ namespace Neighlink.Entity
 {
     public class User :BaseEntity
     {
+        public string Name { get; set; }
         public string Email { get; set; }
-        public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public string PhoneNumber { get; set; }
@@ -16,7 +16,7 @@ namespace Neighlink.Entity
         public string SecurityToken { get; set; }
         public Role Role {get;set;}
         public int? BuildingId {get;set;}
-
+        public int? CondominiumId {get;set;}
         public virtual ICollection<Payment> Payment { get; set; }
     }
 }

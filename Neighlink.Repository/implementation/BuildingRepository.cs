@@ -44,15 +44,7 @@ namespace Neighlink.Repository.implementation
 
         public IEnumerable<Building> GetAll()
         {
-             var result = new List<Building>();
-            try
-            {
-                result = context.Buildings.ToList();
-            }catch(System.Exception)
-            {
-                throw;
-            }
-            return result;
+            throw new System.NotImplementedException();
         }
 
         public bool Save(Building entity)
@@ -72,10 +64,10 @@ namespace Neighlink.Repository.implementation
         {
             try{
                 var buildingOrigin = context.Buildings.Single(x=> x.Id == entity.Id);
-                buildingOrigin.Id = entity.Id;
                 buildingOrigin.Name = entity.Name;
                 buildingOrigin.Status = entity.Status;
                 buildingOrigin.Description = entity.Description;
+                buildingOrigin.NumberOfHomes = entity.NumberOfHomes;
                 context.Update(buildingOrigin);
                 context.SaveChanges();
             }

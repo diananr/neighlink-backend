@@ -16,14 +16,6 @@ namespace Neighlink.Api.Controllers
             this.buildingService = buildingService;
         }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return Ok(
-                buildingService.GetAll()
-            );
-        }
-
         [HttpPost]
         public ActionResult Post([FromBody] Building building)
         {
@@ -32,26 +24,28 @@ namespace Neighlink.Api.Controllers
             );
         }
 
+        [HttpGet("by-condominium/{condominiumId}")]
+        public ActionResult<IEnumerable<Building>> GetBuildings(int condominiumId)
+        {
+            return Ok(buildingService.GetBuildingsByCondominium(condominiumId));
+        }
+
+        [HttpGet("byId/{id}")]
+        public ActionResult<Building> Get(int id)
+        {
+            return Ok(buildingService.Get(id));
+        }
+
         [HttpPut]
         public ActionResult Put([FromBody] Building building)
         {
-            return Ok(
-                buildingService.Update(building)
-            );
+            return Ok(buildingService.Update(building));
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            return Ok(
-                buildingService.Delete(id)
-            );
-        }
-
-        [HttpGet("by-condominium/{condominiumId}")]
-        public ActionResult<IEnumerable<User>> GetBuildings(int condominiumId)
-        {
-            return Ok(buildingService.GetBuildingsByCondominium(condominiumId));
+            return Ok(buildingService.Delete(id));
         }
     }
 }
