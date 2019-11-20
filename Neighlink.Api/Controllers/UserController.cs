@@ -43,14 +43,11 @@ namespace Neighlink.Api.Controllers
 
             User user = new User()
             {
-                Email = request.Email,
-                FirstName = request.FirstName,
+                Name = request.Name,
                 LastName = request.LastName,
+                Email = request.Email,
                 Salt = salt,
-                Gender = request.Gender,
-                PhoneNumber = request.PhoneNumber,
                 SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
-                PhotoUrl = request.PhotoUrl,
                 Role = request.Role,
             };
 
