@@ -14,6 +14,7 @@ namespace Neighlink.Entity
         public virtual ICollection<Poll> Polls { get; set; }
         public virtual ICollection<Building> Buildings { get; set; }
         public virtual ICollection<PaymentCategory> PaymentCategories { get; set; }
-        public virtual ICollection<News> News { get; set; }            
+        public virtual ICollection<News> New { get; set; }       
+         public virtual ICollection<Bill> Bills { get; set; }         
     }
 }
