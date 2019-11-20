@@ -10,7 +10,7 @@ using Neighlink.Repository.Context;
 namespace Neighlink.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191116232342_init")]
+    [Migration("20191119233326_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,7 +64,7 @@ namespace Neighlink.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CondominiumId");
+                    b.Property<int>("CondominiumId");
 
                     b.Property<DateTime?>("CreatedAt");
 
@@ -280,11 +280,11 @@ namespace Neighlink.Repository.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("FirstName");
-
                     b.Property<int>("Gender");
 
                     b.Property<string>("LastName");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("PhoneNumber");
 
@@ -326,7 +326,8 @@ namespace Neighlink.Repository.Migrations
                 {
                     b.HasOne("Neighlink.Entity.Condominium")
                         .WithMany("Buildings")
-                        .HasForeignKey("CondominiumId");
+                        .HasForeignKey("CondominiumId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Neighlink.Entity.Condominium", b =>

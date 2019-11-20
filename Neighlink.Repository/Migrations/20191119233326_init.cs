@@ -82,10 +82,10 @@ namespace Neighlink.Repository.Migrations
                     DeletedAt = table.Column<DateTime>(nullable: true),
                     Status = table.Column<bool>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
                     Names = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     NumberOfHomes = table.Column<int>(maxLength: 4, nullable: false),
-                    CondominiumId = table.Column<int>(nullable: true)
+                    CondominiumId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,7 +95,7 @@ namespace Neighlink.Repository.Migrations
                         column: x => x.CondominiumId,
                         principalTable: "Condominiums",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,8 +186,8 @@ namespace Neighlink.Repository.Migrations
                     DeletedAt = table.Column<DateTime>(nullable: true),
                     Status = table.Column<bool>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
