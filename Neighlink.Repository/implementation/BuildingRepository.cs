@@ -14,7 +14,9 @@ namespace Neighlink.Repository.implementation
         }
         public bool Delete(int id)
         {
+
            try
+           
             {
                 var result = new Building();
                 result = context.Buildings.Single(x => x.Id == id);
