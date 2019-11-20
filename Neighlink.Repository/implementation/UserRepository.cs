@@ -121,7 +121,7 @@ namespace Neighlink.Repository.implementation
                 var user = context.Users.Find(entity.Id);
 
                 user.Email = entity.Email;
-                user.FirstName = entity.FirstName;
+                user.Name = entity.Name;
                 user.LastName = entity.LastName;
                 user.Gender = entity.Gender;
                 user.PhoneNumber = entity.PhoneNumber;

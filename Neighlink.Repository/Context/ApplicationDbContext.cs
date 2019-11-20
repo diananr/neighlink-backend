@@ -20,6 +20,7 @@ namespace Neighlink.Repository.Context
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Option> Options { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         public ApplicationDbContext(DbContextOptions options):base(options)
         {

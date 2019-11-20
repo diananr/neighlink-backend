@@ -4,10 +4,11 @@ using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
-    public class PaymentCategoryService : IPaymentCategoryService
+    
+    public class PaymentService : IPaymentService
     {
-        private IPaymentCategoryRepository paymentRepository;
-        public PaymentCategoryService(IPaymentCategoryRepository paymentRepository)
+        private IPaymentRepository paymentRepository;
+        public PaymentService(IPaymentRepository paymentRepository)
         {
             this.paymentRepository=paymentRepository;
         }
@@ -16,29 +17,34 @@ namespace Neighlink.Service.implementation
             return paymentRepository.Delete(id);
         }
 
-        public PaymentCategory Get(int id)
+        public Payment Get(int id)
         {
             return paymentRepository.Get(id);
         }
 
-        public IEnumerable<PaymentCategory> GetAll()
+        public IEnumerable<Payment> GetAll()
         {
             return paymentRepository.GetAll();
         }
 
-        public bool Save(PaymentCategory entity)
+        public bool Save(Payment entity)
         {
             return paymentRepository.Save(entity);
         }
 
-        public bool Update(PaymentCategory entity)
+        public bool Update(Payment entity)
         {
             return paymentRepository.Update(entity);
         }
 
-        public IEnumerable<PaymentCategory> GetBuildingsByCondominium(int condominiumId)
+        public IEnumerable<Payment> GetPaymentByBill(int billId)
         {
-            return paymentRepository.GetBuildingsByCondominium(condominiumId);
+            return paymentRepository.GetPaymentByBill(billId);
+        }
+
+        public IEnumerable<Payment> GetPaymentsByUser(int userId)
+        {
+            return paymentRepository.GetPaymentsByUser(userId);
         }
     }
 }
