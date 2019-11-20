@@ -15,5 +15,6 @@ namespace Neighlink.Entity
         public string SecurityToken { get; set; }
         public Role Role {get;set;}
         public int? BuildingId {get;set;}
+        public int? CondominiumId {get;set;}
     }
 }
