@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using Neighlink.Entity;
 using Neighlink.Repository.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Neighlink.Repository.implementation
 {
     public class BillRepository : IBillRepository
     {
-
         private ApplicationDbContext context;
-
         public BillRepository(ApplicationDbContext context)
         {
             this.context = context;
         }
+
         public bool Delete(int id)
         {
             try
@@ -26,7 +26,6 @@ namespace Neighlink.Repository.implementation
             }
             catch (System.Exception)
             {
-                
                 throw;
             }
         }
@@ -37,11 +36,9 @@ namespace Neighlink.Repository.implementation
             try
             {
                 result=context.Bills.Single(x=>x.Id==id);
-        
             }
             catch (System.Exception)
             {
-                
                 throw;
             }
             return result;
@@ -49,18 +46,7 @@ namespace Neighlink.Repository.implementation
 
         public IEnumerable<Bill> GetAll()
         {
-             var result= new List<Bill>();
-            try
-            {
-                result=context.Bills.ToList();
-        
-            }
-            catch (System.Exception)
-            {
-                
-                throw;
-            }
-            return result;
+            throw new System.NotImplementedException();
         }
 
         public bool Save(Bill entity)
@@ -72,7 +58,6 @@ namespace Neighlink.Repository.implementation
             }
             catch (System.Exception)
             {
-                
                 return false;
             }
             return true;
@@ -83,23 +68,23 @@ namespace Neighlink.Repository.implementation
             try
             {
                 var billOrigin=context.Bills.Single(x=>x.Id==entity.Id);
-                billOrigin.Id=entity.Id;
                 billOrigin.Name=entity.Name;
                 billOrigin.Amount=entity.Amount;
                 billOrigin.Description=entity.Description;
+                billOrigin.PaymentCategoryId=entity.PaymentCategoryId;
+                billOrigin.BuildingId=entity.BuildingId;
                 billOrigin.Status=entity.Status;
                 context.Update(billOrigin);
                 context.SaveChanges();
             }
             catch (System.Exception)
             {
-                
                 return false;
             }
             return true;
         }
 
-        public IEnumerable<Bill> GetBillByPaymentCategory(int PaymentCategoryId)
+        public IEnumerable<Bill> GetBillsByPaymentCategory(int PaymentCategoryId)
         {
             try
             {
@@ -112,12 +97,25 @@ namespace Neighlink.Repository.implementation
             }
         }
 
-        public IEnumerable<Bill> GetBillByBuilding(int BuildingId)
+        public IEnumerable<Bill> GetBillsByBuilding(int BuildingId)
         {
             try
             {
                 var bills = context.Bills.Where(x => x.BuildingId == BuildingId);
                 return bills;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Bill> GetBillsByCondominium(int CondominiumId)
+        {
+            try
+            {
+                var buildings = context.Buildings.Include(x => x.Bills).Where(y => y.CondominiumId == CondominiumId);
+                return buildings.SelectMany(x => x.Bills);
             }
             catch (System.Exception)
             {

@@ -4,7 +4,8 @@ namespace Neighlink.Repository
 {
     public interface IBillRepository :ICrudRepository<Bill>
     {
-        IEnumerable<Bill> GetBillByPaymentCategory(int PaymentCategoryId);
-        IEnumerable<Bill> GetBillByBuilding(int PaymentCategoryId);
+        IEnumerable<Bill> GetBillsByPaymentCategory(int PaymentCategoryId);
+        IEnumerable<Bill> GetBillsByBuilding(int BuildingId);
+        IEnumerable<Bill> GetBillsByCondominium(int CondominiumId);
     }
 }

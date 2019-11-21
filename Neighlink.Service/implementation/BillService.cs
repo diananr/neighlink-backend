@@ -37,14 +37,19 @@ namespace Neighlink.Service.implementation
             return billRepository.Update(entity);
         }
 
-         public IEnumerable<Bill> GetBillByPaymentCategory(int PaymentCategoryId)
+        public IEnumerable<Bill> GetBillsByPaymentCategory(int PaymentCategoryId)
         {
-            return billRepository.GetBillByPaymentCategory(PaymentCategoryId);
+            return billRepository.GetBillsByPaymentCategory(PaymentCategoryId);
         }
 
-         public IEnumerable<Bill> GetBillByBuilding(int Buildingid)
+        public IEnumerable<Bill> GetBillsByBuilding(int Buildingid)
         {
-            return billRepository.GetBillByBuilding(Buildingid);
+            return billRepository.GetBillsByBuilding(Buildingid);
+        }
+
+        public IEnumerable<Bill> GetBillsByCondominium(int CondominiumId)
+        {
+            return billRepository.GetBillsByCondominium(CondominiumId);
         }
     }
 }
