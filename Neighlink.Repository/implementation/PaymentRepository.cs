@@ -76,7 +76,7 @@ namespace Neighlink.Repository.implementation
 
                 paymentOrigin.Id = entity.Id;
                 paymentOrigin.Amount = entity.Amount;
-                paymentOrigin.Photo = entity.Photo;
+                paymentOrigin.PhotoUrl = entity.PhotoUrl;
                 paymentOrigin.Status = entity.Status;
                 paymentOrigin.PaymentDate = entity.PaymentDate;
 
