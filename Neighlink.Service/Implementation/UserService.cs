@@ -62,7 +62,7 @@ namespace Neighlink.Service.Implementation
 
         public bool UserBelongsToCondominium(User user, int condominiumId)
         {
-            throw new NotImplementedException();
+            return userRepository.UserBelongsToCondominium(user, condominiumId);
         }
     }
 }
