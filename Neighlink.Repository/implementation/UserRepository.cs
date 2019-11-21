@@ -10,7 +10,7 @@ using Neighlink.Entity;
 using Neighlink.Repository.Context;
 using Neighlink.Repository.Utilities;
 using Microsoft.EntityFrameworkCore;
-
+using Neighlink.Entity.Entity;
 
 namespace Neighlink.Repository.implementation
 {
@@ -162,6 +162,31 @@ namespace Neighlink.Repository.implementation
         {
             throw new NotImplementedException();
         }
-        
+
+        public bool UserBelongsToCondominium(User user, int condominiumId)
+        {
+            if (user.Role == Role.Administrator)
+            {
+                var matchingCondo = context.Condominiums.Include(y => y.Administrators).Where(x => x.Id == condominiumId).FirstOrDefault();
+                if (matchingCondo != null && matchingCondo.Administrators.Select(x => x.Id).Contains(user.Id)) 
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            else 
+            {
+                var matchingCondo = context.Condominiums.Include(x => x.Buildings.Select(y => y.Users)).Where(y => y.Id == condominiumId).FirstOrDefault();
+                if (matchingCondo != null) 
+                {
+                    var allUsers = matchingCondo.Buildings.SelectMany(x => x.Users);
+                    bool userBelongsToOneBuilding = allUsers.Select(x => x.Id).Contains(user.Id);
+                    return userBelongsToOneBuilding;
+                }
+
+                return false;
+            }
+        }
     }
 }

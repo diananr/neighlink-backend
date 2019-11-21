@@ -28,10 +28,13 @@ namespace Neighlink.Api.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]LoginRequest loginRequest)
         {
-            var user = userService.Authenticate(loginRequest.Email, loginRequest.Password);
+            User user = userService.Authenticate(loginRequest.Email, loginRequest.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
+
+            if (!userService.UserBelongsToCondominium(user, loginRequest.CondominiumId))
+                return Ok("El usuario no pertenece a este condominio");
 
             return Ok(user);
         }

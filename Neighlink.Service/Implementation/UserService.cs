@@ -59,5 +59,10 @@ namespace Neighlink.Service.Implementation
         {
             throw new NotImplementedException();
         }
+
+        public bool UserBelongsToCondominium(User user, int condominiumId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
