@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neighlink.Api", "Neighlink.Api\Neighlink.Api.csproj", "{CE8FCAAE-3269-4C5A-B3FD-BE517A39C294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neighlink.Api", "Neighlink.Api\Neighlink.Api.csproj", "{CE8FCAAE-3269-4C5A-B3FD-BE517A39C294}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neighlink.Repository", "Neighlink.Repository\Neighlink.Repository.csproj", "{2A62AFC9-AD9A-47CB-93CB-35ED89A1A062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neighlink.Repository", "Neighlink.Repository\Neighlink.Repository.csproj", "{2A62AFC9-AD9A-47CB-93CB-35ED89A1A062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neighlink.Entity", "Neighlink.Entity\Neighlink.Entity.csproj", "{37C4F88A-3EA4-45B1-84CA-F3354B976854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neighlink.Entity", "Neighlink.Entity\Neighlink.Entity.csproj", "{37C4F88A-3EA4-45B1-84CA-F3354B976854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neighlink.Service", "Neighlink.Service\Neighlink.Service.csproj", "{869DF126-F06E-4828-A91B-13D6ED733022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neighlink.Service", "Neighlink.Service\Neighlink.Service.csproj", "{869DF126-F06E-4828-A91B-13D6ED733022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neighlink.ApiTests", "Neighlink.ApiTests\Neighlink.ApiTests.csproj", "{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CE8FCAAE-3269-4C5A-B3FD-BE517A39C294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +71,23 @@ Global
 		{869DF126-F06E-4828-A91B-13D6ED733022}.Release|x64.Build.0 = Release|Any CPU
 		{869DF126-F06E-4828-A91B-13D6ED733022}.Release|x86.ActiveCfg = Release|Any CPU
 		{869DF126-F06E-4828-A91B-13D6ED733022}.Release|x86.Build.0 = Release|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Debug|x64.Build.0 = Debug|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Debug|x86.Build.0 = Debug|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Release|x64.ActiveCfg = Release|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Release|x64.Build.0 = Release|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D9B3A0BF-FBA4-4156-9D67-2E684EFA263B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D09A95A4-F136-4B5A-8D9B-B62B0D5988BA}
 	EndGlobalSection
 EndGlobal
