@@ -3,6 +3,7 @@ using Neighlink.Entity;
 using Neighlink.Repository.Context;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Neighlink.Repository.implementation
 {
@@ -53,7 +54,27 @@ namespace Neighlink.Repository.implementation
         {
             try
             {
+                var matchingBuilding = context.Buildings.Include(y => y.Users).Where(x => x.Id == entity.BuildingId).FirstOrDefault();
+                var amountOfOwners = matchingBuilding.Users.Count;
+
                 context.Add(entity);
+                context.SaveChanges();
+
+                foreach (var user in matchingBuilding.Users)
+                {
+                    Payment payment = new Payment()
+                    {
+                        Amount = Convert.ToInt32(entity.Amount / amountOfOwners),
+                        BillId = entity.Id,
+                        UserId = user.Id
+                    };
+
+                    if (user.Payment == null)
+                        user.Payment = new List<Payment>();
+
+                    user.Payment.Add(payment);
+                }
+
                 context.SaveChanges();
             }
             catch (System.Exception)
