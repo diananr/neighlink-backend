@@ -91,6 +91,9 @@ namespace Neighlink.Api
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
 
+            services.AddTransient<IPaymentRepository, PaymentRepository>();
+            services.AddTransient<IPaymentService, PaymentService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

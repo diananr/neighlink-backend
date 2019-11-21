@@ -4,7 +4,6 @@ using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
-    
     public class PaymentService : IPaymentService
     {
         private IPaymentRepository paymentRepository;
@@ -37,14 +36,17 @@ namespace Neighlink.Service.implementation
             return paymentRepository.Update(entity);
         }
 
-        public IEnumerable<Payment> GetPaymentByBill(int billId)
+        public IEnumerable<Payment> GetPaymentsByBill(int billId)
         {
-            return paymentRepository.GetPaymentByBill(billId);
+            return paymentRepository.GetPaymentsByBill(billId);
         }
-
         public IEnumerable<Payment> GetPaymentsByUser(int userId)
         {
             return paymentRepository.GetPaymentsByUser(userId);
+        }
+        public IEnumerable<Payment> GetPaymentsByCondominium(int condominiumId)
+        {
+            return paymentRepository.GetPaymentsByCondominium(condominiumId);
         }
     }
 }

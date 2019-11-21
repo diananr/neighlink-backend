@@ -93,7 +93,7 @@ namespace Neighlink.Repository.implementation
             {
                 var buildings = context.Buildings.Include(x => x.Users).Where(y => y.CondominiumId == condominiumId);
                 var users = buildings.SelectMany(x => x.Users);
-                return users;
+                return users.Where(x => x.Role == Entity.Entity.Role.Owner);
             }
             catch (System.Exception)
             {
@@ -155,7 +155,15 @@ namespace Neighlink.Repository.implementation
 
         public bool Save(User entity)
         {
-            throw new NotImplementedException();
+            try{
+                context.Add(entity);
+                context.SaveChanges();
+            }
+            catch(System.Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public IEnumerable<User> GetAll()
@@ -177,7 +185,7 @@ namespace Neighlink.Repository.implementation
             }
             else 
             {
-                var matchingCondo = context.Condominiums.Include(x => x.Buildings.Select(y => y.Users)).Where(y => y.Id == condominiumId).FirstOrDefault();
+                var matchingCondo = context.Condominiums.Include(x => x.Buildings).Where(y => y.Id == condominiumId).FirstOrDefault();
                 if (matchingCondo != null) 
                 {
                     var allUsers = matchingCondo.Buildings.SelectMany(x => x.Users);

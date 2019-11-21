@@ -196,6 +196,7 @@ namespace Neighlink.Repository.Migrations
                     SaltedAndHashedPassword = table.Column<byte[]>(nullable: true),
                     SecurityToken = table.Column<string>(nullable: true),
                     Role = table.Column<int>(nullable: false),
+                    HouseNumber = table.Column<int>(nullable: false),
                     BuildingId = table.Column<int>(nullable: true),
                     CondominiumId = table.Column<int>(nullable: true)
                 },
@@ -270,9 +271,10 @@ namespace Neighlink.Repository.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
                     PaymentDate = table.Column<DateTime>(nullable: false),
-                    Photo = table.Column<string>(nullable: true),
+                    PhotoUrl = table.Column<string>(nullable: true),
                     BillId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    HasPaid = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

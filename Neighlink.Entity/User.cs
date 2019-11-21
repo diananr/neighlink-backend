@@ -15,8 +15,9 @@ namespace Neighlink.Entity
         public byte[] SaltedAndHashedPassword { get; set; }
         public string SecurityToken { get; set; }
         public Role Role {get;set;}
+        public int HouseNumber {get;set;}
         public int? BuildingId {get;set;}
         public int? CondominiumId {get;set;}
-        public virtual ICollection<Payment> Payment { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

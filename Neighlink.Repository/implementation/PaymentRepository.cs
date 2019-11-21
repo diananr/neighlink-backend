@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Neighlink.Entity;
 using Neighlink.Repository.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Neighlink.Repository.implementation
 {
     public class PaymentRepository : IPaymentRepository
     {
-
         private ApplicationDbContext context;
         public PaymentRepository(ApplicationDbContext context)
         {
@@ -90,7 +90,7 @@ namespace Neighlink.Repository.implementation
             return true;
         }
 
-         public IEnumerable<Payment> GetPaymentByBill(int billId)
+         public IEnumerable<Payment> GetPaymentsByBill(int billId)
         {
              try
             {
@@ -109,6 +109,19 @@ namespace Neighlink.Repository.implementation
             {
                 var payments = context.Payments.Where(x => x.UserId == userId);
                 return payments;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Payment> GetPaymentsByCondominium(int condominiumId)
+        {
+            try
+            {
+                var users = context.Users.Include(x => x.Payments).Where(y => y.CondominiumId == condominiumId);
+                return users.SelectMany(x => x.Payments);
             }
             catch (System.Exception)
             {

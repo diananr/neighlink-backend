@@ -25,7 +25,7 @@ namespace Neighlink.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public IActionResult Authenticate([FromBody]LoginRequest loginRequest)
         {
             User user = userService.Authenticate(loginRequest.Email, loginRequest.Password);
@@ -39,8 +39,8 @@ namespace Neighlink.Api.Controllers
             return Ok(user);
         }
 
-        [HttpPost]
-        public ActionResult Post([FromBody] RegisterUserRequest request)
+        [HttpPost("signup")]
+        public ActionResult Signup([FromBody] RegisterUserRequest request)
         {
             byte[] salt = CustomLoginProviderUtils.GenerateSalt();
 
@@ -52,6 +52,38 @@ namespace Neighlink.Api.Controllers
                 Salt = salt,
                 SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
                 Role = request.Role,
+                CondominiumId = request.CondominiumId
+            };
+
+            bool saveUser = false;
+
+            if (request.Role == Entity.Entity.Role.Administrator) 
+            {
+                saveUser = userService.RegisterAdmin(user, request.CondominiumId);
+            }
+
+            if (request.BuildingId > 0)
+            {
+                saveUser = userService.RegisterOwner(user, request.BuildingId);
+            }
+
+            return Ok(saveUser);
+        }
+
+        [HttpPost]
+        public ActionResult SaveUser([FromBody] RegisterUserRequest request)
+        {
+            byte[] salt = CustomLoginProviderUtils.GenerateSalt();
+
+            User user = new User()
+            {
+                Name = request.Name,
+                LastName = request.LastName,
+                Email = request.Email,
+                Salt = salt,
+                SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
+                Role = request.Role,
+                CondominiumId = request.CondominiumId
             };
 
             bool saveUser = false;
@@ -62,7 +94,8 @@ namespace Neighlink.Api.Controllers
             }
 
             if (request.Role == Entity.Entity.Role.Owner)
-            {
+            {   
+                user.HouseNumber = request.HouseNumber;
                 saveUser = userService.RegisterOwner(user, request.BuildingId);
             }
 

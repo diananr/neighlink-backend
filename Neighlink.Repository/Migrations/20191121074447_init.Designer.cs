@@ -10,7 +10,7 @@ using Neighlink.Repository.Context;
 namespace Neighlink.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191121000836_init")]
+    [Migration("20191121074447_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,9 +224,11 @@ namespace Neighlink.Repository.Migrations
 
                     b.Property<DateTime?>("DeletedAt");
 
+                    b.Property<bool>("HasPaid");
+
                     b.Property<DateTime>("PaymentDate");
 
-                    b.Property<string>("Photo");
+                    b.Property<string>("PhotoUrl");
 
                     b.Property<bool>("Status");
 
@@ -318,6 +320,8 @@ namespace Neighlink.Repository.Migrations
                     b.Property<string>("Email");
 
                     b.Property<int>("Gender");
+
+                    b.Property<int>("HouseNumber");
 
                     b.Property<string>("LastName");
 

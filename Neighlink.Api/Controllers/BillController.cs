@@ -1,15 +1,13 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Neighlink.Entity;
 using Neighlink.Service;
 using System.Collections.Generic;
 
 namespace Neighlink.Api.Controllers
-
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BillController:ControllerBase
+    public class BillController :ControllerBase
     {
         private IBillService billService;
 

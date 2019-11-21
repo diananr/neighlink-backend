@@ -69,10 +69,10 @@ namespace Neighlink.Repository.implementation
                         UserId = user.Id
                     };
 
-                    if (user.Payment == null)
-                        user.Payment = new List<Payment>();
+                    if (user.Payments == null)
+                        user.Payments = new List<Payment>();
 
-                    user.Payment.Add(payment);
+                    user.Payments.Add(payment);
                 }
 
                 context.SaveChanges();

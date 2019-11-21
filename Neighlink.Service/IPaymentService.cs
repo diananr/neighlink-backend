@@ -5,7 +5,8 @@ namespace Neighlink.Service
 {
     public interface IPaymentService:ICrudService<Payment>
     {
-         IEnumerable<Payment> GetPaymentByBill(int billId);
-         IEnumerable<Payment> GetPaymentsByUser(int userId);
+        IEnumerable<Payment> GetPaymentsByBill(int billId);
+        IEnumerable<Payment> GetPaymentsByUser(int userId);
+        IEnumerable<Payment> GetPaymentsByCondominium(int condominiumId);
     }
 }
