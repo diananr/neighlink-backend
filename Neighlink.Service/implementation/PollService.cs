@@ -1,33 +1,44 @@
 using System.Collections.Generic;
 using Neighlink.Entity.Entity;
+using Neighlink.Repository;
 
 namespace Neighlink.Service.implementation
 {
     public class PollService : IPollService
     {
+        private IPollRepository pollRepository;
+        public PollService(IPollRepository pollRepository)
+        {
+            this.pollRepository=pollRepository;
+        }
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return pollRepository.Delete(id);
         }
 
         public Poll Get(int id)
         {
-            throw new System.NotImplementedException();
+            return pollRepository.Get(id);
         }
 
         public IEnumerable<Poll> GetAll()
         {
-            throw new System.NotImplementedException();
+            return pollRepository.GetAll();
         }
 
         public bool Save(Poll entity)
         {
-            throw new System.NotImplementedException();
+            return pollRepository.Save(entity);
         }
 
         public bool Update(Poll entity)
         {
-            throw new System.NotImplementedException();
+            return pollRepository.Update(entity);
+        }
+
+         public IEnumerable<Poll> GetNewsByCondominium(int condominiumId)
+        {
+            return pollRepository.GetNewsByCondominium(condominiumId);
         }
     }
 }
