@@ -8,7 +8,6 @@ namespace Neighlink.Entity
         public string Description { get; set; }
         public virtual ICollection<Bill> Bills { get; set; }
         public virtual int CondominiumId { get; set; }
-                          
-        
+
      }
 }

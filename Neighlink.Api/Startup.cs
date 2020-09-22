@@ -11,8 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Neighlink.Entity;
 using Neighlink.Repository;
@@ -42,7 +40,6 @@ namespace Neighlink.Api
 
             var secretsSection = Configuration.GetSection("PrivateSettings");
             services.Configure<PrivateSettings>(secretsSection);
-
             //Configurar JWT
             var appSettings = secretsSection.Get<PrivateSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.AuthenticationSecret);
@@ -110,13 +107,11 @@ namespace Neighlink.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
+            }else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()

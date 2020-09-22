@@ -13,6 +13,11 @@ namespace Neighlink.Service.implementation
         {
             this.newRepository=newRepository;
         }
+
+        public NewService()
+        {
+        }
+
         public bool Delete(int id)
         {
             return newRepository.Delete(id);

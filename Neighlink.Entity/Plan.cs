@@ -10,5 +10,6 @@ namespace Neighlink.Entity
         public int NumberOfHomes { get; set; }
         public PlanType Type { get; set; }
         public virtual ICollection<Condominium> Condominiums { get; set; }
+    
     }
 }

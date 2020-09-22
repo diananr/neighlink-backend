@@ -37,8 +37,8 @@ namespace Neighlink.Api.Controllers.Tests
         public void AuthenticateTest_HappyPath_UserLogsIn()
         {
             //Arrange
-            string expectedEmail = "voldemort@hogwarts.com";
-            string expectedPassword = "ihateharrypotter";
+            string expectedEmail = "nuevo@gmail.com";
+            string expectedPassword = "1234";
             int expectedCondo = 1;
 
             User expectedUser = new User() { Email = expectedEmail };
