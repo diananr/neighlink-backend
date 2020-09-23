@@ -70,14 +70,15 @@ namespace AceptanseCriteria
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("El residente ha registrado su voto para una encuesta determinada.", new string[] {
-                "R3"}, SourceLine=5)]
-        public virtual void ElResidenteHaRegistradoSuVotoParaUnaEncuestaDeterminada_()
+
+        [TechTalk.SpecRun.ScenarioAttribute("El usuario ha registrado su voto para una encuesta determinada.", new string[] {
+                "tag1"}, SourceLine=5)]
+        public virtual void ElUsuarioHaRegistradoSuVotoParaUnaEncuestaDeterminada_()
         {
             string[] tagsOfScenario = new string[] {
-                    "R3"};
+                    "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El residente ha registrado su voto para una encuesta determinada.", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario ha registrado su voto para una encuesta determinada.", null, tagsOfScenario, argumentsOfScenario);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -99,26 +100,31 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.Given("que el residente se encuentra en la vista \"Encuestas\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+
+ testRunner.Given("que el usuario se encuentra en la vista \"Encuestas\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.When("quiera registrar mi voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("el usuario quiera registrar su voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.Then("al seleccionar una opción, la aplicación considerará como voto y lo registrará.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("al seleccionar una opcion como respuesta a alguna encuesta , y luego presionar en" +
+                        "viar , la aplicación registrara el voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("El residente ha visualizado si su voto ha sido registrado en la aplicación.", new string[] {
-                "R4"}, SourceLine=10)]
-        public virtual void ElResidenteHaVisualizadoSiSuVotoHaSidoRegistradoEnLaAplicacion_()
+
+        [TechTalk.SpecRun.ScenarioAttribute("El usuario ha visualizado si su voto ha sido registrado en la aplicación", new string[] {
+                "tag1"}, SourceLine=10)]
+        public virtual void ElUsuarioHaVisualizadoSiSuVotoHaSidoRegistradoEnLaAplicacion()
         {
             string[] tagsOfScenario = new string[] {
-                    "R4"};
+                    "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El residente ha visualizado si su voto ha sido registrado en la aplicación.", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario ha visualizado si su voto ha sido registrado en la aplicación", null, tagsOfScenario, argumentsOfScenario);
+
 #line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -140,13 +146,56 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 12
- testRunner.Given("que el residente se encuentra en la vista \"Encuestas\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("que el usuario se encuentra en la vista \"Encuestas\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 13
- testRunner.When("quiera ver que su voto se registró con éxito.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("quiera ver si su voto se registro con exito.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 14
- testRunner.Then("se mostrará la opción sombreada.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("la aplicación mostrar la opcion registrada como respuesta de manera sombreada.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("El usuario desea cambiar su voto para una encuesta determinada.", new string[] {
+                "tag1"}, SourceLine=15)]
+        public virtual void ElUsuarioDeseaCambiarSuVotoParaUnaEncuestaDeterminada_()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "tag1"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario desea cambiar su voto para una encuesta determinada.", null, tagsOfScenario, argumentsOfScenario);
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 17
+ testRunner.Given("que el usuario se encuentra en la vista \"Encuestas\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+ testRunner.When("quiera cambiar su voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
+ testRunner.Then("la aplicación mostrar una ventana donde permitira editar la respuesta dada por el" +
+                        " usuario.La aplicación registrara su nuevo voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+
 #line hidden
             }
             this.ScenarioCleanup();

@@ -19,22 +19,25 @@ namespace AceptanseCriteria
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Ver Novedades", Description="A short summary of the feature", SourceFile="Ver Novedades.feature", SourceLine=0)]
-    public partial class VerNovedadesFeature
+    [TechTalk.SpecRun.FeatureAttribute("Registro Residente", new string[] {
+            "automated"}, Description="A short summary of the feature", SourceFile="Registro Residente.feature", SourceLine=1)]
+    public partial class RegistroResidenteFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "automated"};
         
-#line 1 "Ver Novedades.feature"
+#line 1 "Registro Residente.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Ver Novedades", "A short summary of the feature", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Registro Residente", "A short summary of the feature", ProgrammingLanguage.CSharp, new string[] {
+                        "automated"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,18 +73,15 @@ namespace AceptanseCriteria
             testRunner.CollectScenarioErrors();
         }
         
-
-        [TechTalk.SpecRun.ScenarioAttribute("El usuario revisa el  mural de noticias en la aplicacion.", new string[] {
-                "R5"}, SourceLine=5)]
-        public virtual void ElUsuarioRevisaElMuralDeNoticiasEnLaAplicacion_()
+        [TechTalk.SpecRun.ScenarioAttribute("El usuario ingresa el codigo de su condominio", new string[] {
+                "R1"}, SourceLine=6)]
+        public virtual void ElUsuarioIngresaElCodigoDeSuCondominio()
         {
             string[] tagsOfScenario = new string[] {
-                    "R5"};
+                    "R1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario revisa el  mural de noticias en la aplicacion.", null, tagsOfScenario, argumentsOfScenario);
-
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario ingresa el codigo de su condominio", null, tagsOfScenario, argumentsOfScenario);
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -101,31 +101,30 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
-
- testRunner.Given("que el usuario esta en la seccion de \"Inicio\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 8
- testRunner.When("El usuario quiera informarse sobre actividades desarrolladas tiempo atras en el c" +
-                        "ondominio/edificio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("el usuario esta en la pantalla Registrate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.Then("al seleccionar esta opcion , la aplicación mostrara toda la informacion detallada" +
-                        " y ordernada por fecha de publicacion, que haya sido registrada por el administr" +
-                        "ador.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("el usuarioingrese el código de su condominio o edificio, la aplicación verificasi" +
+                        " es válidoo no el código ingresado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 10
+ testRunner.Then("si es válido, la aplicación redirige al usuarioal siguiente pasopara que éstecolo" +
+                        "que sus credenciales;caso contrario le mostrará un mensajea dicho usuario dicien" +
+                        "doque el código no es válido.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("El usuario revisa el mural de noticias pasadas en la aplicacion.", new string[] {
-                "R5"}, SourceLine=11)]
-        public virtual void ElUsuarioRevisaElMuralDeNoticiasPasadasEnLaAplicacion_()
+        [TechTalk.SpecRun.ScenarioAttribute("El usuario ingresa su email y password", new string[] {
+                "R2"}, SourceLine=11)]
+        public virtual void ElUsuarioIngresaSuEmailYPassword()
         {
             string[] tagsOfScenario = new string[] {
-                    "R5"};
+                    "R2"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario revisa el mural de noticias pasadas en la aplicacion.", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario ingresa su email y password", null, tagsOfScenario, argumentsOfScenario);
 #line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -147,29 +146,31 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 13
- testRunner.Given("que el usuario esta en la seccion de \"Inicio\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("que el usuario está en el segundo paso de la sección “Regístrate”.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 14
- testRunner.When("el usuario quiera informarse sobre las actividades que se realizaran en tiempo at" +
-                        "ras en el condominio/edificio.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("el usuario ingresa sus credenciales (email y password).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 15
- testRunner.Then("al seleccionar la fecha, la aplicación mostrara toda la informacion detallada y o" +
-                        "rdernada por fecha de publicacion, que haya sido registrada por el administrador" +
-                        ".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("la aplicación validará que el email sea nuevo, es decir, que no exista un email i" +
+                        "gual ya registrado en la aplicación; si es así, se redirecciona a la vista princ" +
+                        "ipal, caso contrario se muestra un mensaje al usuario diciéndole que ya existe e" +
+                        "se email.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("El usuario revisa de manera quien publico la noticia el muro de la aplicacion.", new string[] {
-                "R5"}, SourceLine=16)]
-        public virtual void ElUsuarioRevisaDeManeraQuienPublicoLaNoticiaElMuroDeLaAplicacion_()
+        [TechTalk.SpecRun.ScenarioAttribute("El usuario ha ingresado su email y password para poder registrarse en la aplicaci" +
+            "ón erroneamente", new string[] {
+                "R3"}, SourceLine=16)]
+        public virtual void ElUsuarioHaIngresadoSuEmailYPasswordParaPoderRegistrarseEnLaAplicacionErroneamente()
         {
             string[] tagsOfScenario = new string[] {
-                    "R5"};
+                    "R3"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario revisa de manera quien publico la noticia el muro de la aplicacion.", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario ha ingresado su email y password para poder registrarse en la aplicaci" +
+                    "ón erroneamente", null, tagsOfScenario, argumentsOfScenario);
 #line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -191,16 +192,14 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 18
- testRunner.Given("que el usuario esta en la seccion de \"Inicio\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("que el usuario esta en el primer paso de la sección “Regístrate”.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 19
- testRunner.When("El usuario quiera informarse de manera detallada sobre las actividades del condom" +
-                        "inio/edificio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("el usuario ingresa sus credenciales pero este esta incompleto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 20
- testRunner.Then("al seleccionar esta opcion , la aplicación mostrara nombre y foto del administrad" +
-                        "or del condominio.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-
+ testRunner.Then("la aplicación le mostrara un mensaje a dicho usuario diciendo “Error de Registro " +
+                        "complete los campos”", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
