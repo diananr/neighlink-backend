@@ -1,52 +1,54 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
 using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class PaymentService : IPaymentService
     {
-        private IPaymentRepository paymentRepository;
-        public PaymentService(IPaymentRepository paymentRepository)
+        private IPaymentRepository _paymentRepository;
+        public PaymentService(ApplicationDbContext context)
         {
-            this.paymentRepository=paymentRepository;
+            _paymentRepository = new PaymentRepository( context );
         }
-        public bool Delete(int id)
+        public void Add(Payment entity)
         {
-            return paymentRepository.Delete(id);
+            _paymentRepository.Add( entity );
+        }
+
+        public void Delete(int id)
+        {
+            _paymentRepository.Delete( id );
         }
 
         public Payment Get(int id)
         {
-            return paymentRepository.Get(id);
+            return _paymentRepository.GetById( id );
         }
 
         public IEnumerable<Payment> GetAll()
         {
-            return paymentRepository.GetAll();
+            return _paymentRepository.GetAll();
         }
 
-        public bool Save(Payment entity)
+        public void Update(Payment entity)
         {
-            return paymentRepository.Save(entity);
-        }
-
-        public bool Update(Payment entity)
-        {
-            return paymentRepository.Update(entity);
+            _paymentRepository.Update( entity );
         }
 
         public IEnumerable<Payment> GetPaymentsByBill(int billId)
         {
-            return paymentRepository.GetPaymentsByBill(billId);
+            return _paymentRepository.GetPaymentsByBill( billId );
         }
         public IEnumerable<Payment> GetPaymentsByUser(int userId)
         {
-            return paymentRepository.GetPaymentsByUser(userId);
+            return _paymentRepository.GetPaymentsByUser( userId );
         }
         public IEnumerable<Payment> GetPaymentsByCondominium(int condominiumId)
         {
-            return paymentRepository.GetPaymentsByCondominium(condominiumId);
+            return _paymentRepository.GetPaymentsByCondominium( condominiumId );
         }
     }
 }

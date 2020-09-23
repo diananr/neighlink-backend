@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Neighlink.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route( "api/[controller]" )]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -25,21 +25,21 @@ namespace Neighlink.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("login")]
-        public IActionResult Authenticate([FromBody]LoginRequest loginRequest)
+        [HttpPost( "login" )]
+        public IActionResult Authenticate([FromBody] LoginRequest loginRequest)
         {
-            User user = userService.Authenticate(loginRequest.Email, loginRequest.Password);
+            User user = userService.Authenticate( loginRequest.Email, loginRequest.Password );
 
             if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest( new { message = "Username or password is incorrect" } );
 
-            if (!userService.UserBelongsToCondominium(user, loginRequest.CondominiumId))
-                return Ok("El usuario no pertenece a este condominio");
+            if (!userService.UserBelongsToCondominium( user, loginRequest.CondominiumId ))
+                return Ok( "El usuario no pertenece a este condominio" );
 
-            return Ok(user);
+            return Ok( user );
         }
 
-        [HttpPost("signup")]
+        [HttpPost( "signup" )]
         public ActionResult Signup([FromBody] RegisterUserRequest request)
         {
             byte[] salt = CustomLoginProviderUtils.GenerateSalt();
@@ -50,24 +50,24 @@ namespace Neighlink.Api.Controllers
                 LastName = request.LastName,
                 Email = request.Email,
                 Salt = salt,
-                SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
+                SaltedAndHashedPassword = CustomLoginProviderUtils.Hash( request.Password, salt ),
                 Role = request.Role,
                 CondominiumId = request.CondominiumId
             };
 
             bool saveUser = false;
 
-            if (request.Role == Entity.Entity.Role.Administrator) 
+            if (request.Role == Entity.Entity.Role.Administrator)
             {
-                saveUser = userService.RegisterAdmin(user, request.CondominiumId);
+                saveUser = userService.RegisterAdmin( user, request.CondominiumId );
             }
 
             if (request.BuildingId > 0)
             {
-                saveUser = userService.RegisterOwner(user, request.BuildingId);
+                saveUser = userService.RegisterOwner( user, request.BuildingId );
             }
 
-            return Ok(saveUser);
+            return Ok( saveUser );
         }
 
         [HttpPost]
@@ -81,49 +81,51 @@ namespace Neighlink.Api.Controllers
                 LastName = request.LastName,
                 Email = request.Email,
                 Salt = salt,
-                SaltedAndHashedPassword = CustomLoginProviderUtils.Hash(request.Password, salt),
+                SaltedAndHashedPassword = CustomLoginProviderUtils.Hash( request.Password, salt ),
                 Role = request.Role,
                 CondominiumId = request.CondominiumId
             };
 
             bool saveUser = false;
 
-            if (request.Role == Entity.Entity.Role.Administrator) 
+            if (request.Role == Entity.Entity.Role.Administrator)
             {
-                saveUser = userService.RegisterAdmin(user, request.CondominiumId);
+                saveUser = userService.RegisterAdmin( user, request.CondominiumId );
             }
 
             if (request.Role == Entity.Entity.Role.Owner)
-            {   
+            {
                 user.HouseNumber = request.HouseNumber;
-                saveUser = userService.RegisterOwner(user, request.BuildingId);
+                saveUser = userService.RegisterOwner( user, request.BuildingId );
             }
 
-            return Ok(saveUser);
+            return Ok( saveUser );
         }
 
-        [HttpGet("by-condominium/{condominiumId}")]
+        [HttpGet( "by-condominium/{condominiumId}" )]
         public ActionResult<IEnumerable<User>> GetUsers(int condominiumId)
         {
-            return Ok(userService.GetUsersByCondominium(condominiumId));
+            return Ok( userService.GetUsersByCondominium( condominiumId ) );
         }
 
-        [HttpGet("{id}")]
+        [HttpGet( "{id}" )]
         public ActionResult<User> Get(int id)
         {
-            return Ok(userService.Get(id));
+            return Ok( userService.Get( id ) );
         }
 
         [HttpPut]
         public ActionResult Put([FromBody] User user)
         {
-            return Ok(userService.Update(user));
+            userService.Update( user );
+            return Ok( true );
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete( "{id}" )]
         public ActionResult Delete(int id)
         {
-            return Ok(userService.Delete(id));
+            userService.Delete( id );
+            return Ok( true );
         }
     }
 }

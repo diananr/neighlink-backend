@@ -14,40 +14,41 @@ using Neighlink.Entity.Entity;
 
 namespace Neighlink.Repository.implementation
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : CrudRepository<User>, IUserRepository
     {
-        private ApplicationDbContext context;
-        private PrivateSettings settings;
+        private ApplicationDbContext _context;
+        private PrivateSettings _settings;
         public UserRepository(ApplicationDbContext context, IOptions<PrivateSettings> settings)
         {
-            this.context = context;
-            this.settings = settings.Value;
+            Init( context );
+            _context = context;
+            _settings = settings.Value;
         }
 
         public User Authenticate(string email, string password)
         {
-            var user = context.Users.Where(x => x.Email == email).FirstOrDefault();
+            var user = _context.Users.Where( x => x.Email == email ).FirstOrDefault();
 
             if (user == null) return null;
 
-            byte[] incoming = CustomLoginProviderUtils.Hash(password, user.Salt);
+            byte[] incoming = CustomLoginProviderUtils.Hash( password, user.Salt );
 
-            if (!CustomLoginProviderUtils.SlowEquals(incoming, user.SaltedAndHashedPassword))
+            if (!CustomLoginProviderUtils.SlowEquals( incoming, user.SaltedAndHashedPassword ))
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(settings.AuthenticationSecret);
+            var key = Encoding.ASCII.GetBytes( _settings.AuthenticationSecret );
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity( new Claim[]
                 {
                     new Claim(ClaimTypes.Email, user.Email.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                } ),
+                Expires = DateTime.UtcNow.AddDays( 7 ),
+                SigningCredentials = new SigningCredentials( new SymmetricSecurityKey( key ), SecurityAlgorithms.HmacSha256Signature )
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.SecurityToken = tokenHandler.WriteToken(token);
+            var token = tokenHandler.CreateToken( tokenDescriptor );
+            user.SecurityToken = tokenHandler.WriteToken( token );
 
             user.SaltedAndHashedPassword = null;
             user.Salt = null;
@@ -55,14 +56,14 @@ namespace Neighlink.Repository.implementation
             return user;
         }
 
-        public bool RegisterOwner(User user, int buildingId) 
+        public bool RegisterOwner(User user, int buildingId)
         {
             try
             {
-                var matchingBuilding = context.Buildings.Where(x => x.Id == buildingId).FirstOrDefault();
-                if(matchingBuilding.Users == null) matchingBuilding.Users = new List<User>();
-                matchingBuilding.Users.Add(user);
-                context.SaveChanges();
+                var matchingBuilding = _context.Buildings.Where( x => x.Id == buildingId ).FirstOrDefault();
+                if (matchingBuilding.Users == null) matchingBuilding.Users = new List<User>();
+                matchingBuilding.Users.Add( user );
+                _context.SaveChanges();
             }
             catch (System.Exception)
             {
@@ -75,10 +76,10 @@ namespace Neighlink.Repository.implementation
         {
             try
             {
-                var matchingCondo = context.Condominiums.Where(x => x.Id == condominiumId).FirstOrDefault();
-                if(matchingCondo.Administrators == null) matchingCondo.Administrators = new List<User>();
-                matchingCondo.Administrators.Add(user);
-                context.SaveChanges();
+                var matchingCondo = _context.Condominiums.Where( x => x.Id == condominiumId ).FirstOrDefault();
+                if (matchingCondo.Administrators == null) matchingCondo.Administrators = new List<User>();
+                matchingCondo.Administrators.Add( user );
+                _context.SaveChanges();
             }
             catch (System.Exception)
             {
@@ -91,9 +92,9 @@ namespace Neighlink.Repository.implementation
         {
             try
             {
-                var buildings = context.Buildings.Include(x => x.Users).Where(y => y.CondominiumId == condominiumId);
-                var users = buildings.SelectMany(x => x.Users);
-                return users.Where(x => x.Role == Entity.Entity.Role.Owner);
+                var buildings = _context.Buildings.Include( x => x.Users ).Where( y => y.CondominiumId == condominiumId );
+                var users = buildings.SelectMany( x => x.Users );
+                return users.Where( x => x.Role == Entity.Entity.Role.Owner );
             }
             catch (System.Exception)
             {
@@ -105,8 +106,8 @@ namespace Neighlink.Repository.implementation
         {
             try
             {
-                 var user = context.Users.Find(id);
-                 return user;
+                var user = _context.Users.Find( id );
+                return user;
             }
             catch (System.Exception)
             {
@@ -114,82 +115,25 @@ namespace Neighlink.Repository.implementation
             }
         }
 
-        public bool Update(User entity)
-        {
-            try
-            {
-                var user = context.Users.Find(entity.Id);
-
-                user.Email = entity.Email;
-                user.Name = entity.Name;
-                user.LastName = entity.LastName;
-                user.Gender = entity.Gender;
-                user.PhoneNumber = entity.PhoneNumber;
-                user.PhotoUrl = entity.PhotoUrl;
-                user.Status = entity.Status;
-                user.BuildingId = entity.BuildingId;
-
-                context.SaveChanges();
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
-        }
-
-        public bool Delete(int id)
-        {
-            try
-            {
-                var user = context.Users.Find(id);
-                context.Users.Remove(user);
-                context.SaveChanges();
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
-        }
-
-        public bool Save(User entity)
-        {
-            try{
-                context.Add(entity);
-                context.SaveChanges();
-            }
-            catch(System.Exception)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool UserBelongsToCondominium(User user, int condominiumId)
         {
             if (user.Role == Role.Administrator)
             {
-                var matchingCondo = context.Condominiums.Include(y => y.Administrators).Where(x => x.Id == condominiumId).FirstOrDefault();
-                if (matchingCondo != null && matchingCondo.Administrators.Select(x => x.Id).Contains(user.Id)) 
+                var matchingCondo = _context.Condominiums.Include( y => y.Administrators ).Where( x => x.Id == condominiumId ).FirstOrDefault();
+                if (matchingCondo != null && matchingCondo.Administrators.Select( x => x.Id ).Contains( user.Id ))
                 {
                     return true;
                 }
 
                 return false;
             }
-            else 
+            else
             {
-                var matchingCondo = context.Condominiums.Include(x => x.Buildings).Where(y => y.Id == condominiumId).FirstOrDefault();
-                if (matchingCondo != null) 
+                var matchingCondo = _context.Condominiums.Include( x => x.Buildings ).Where( y => y.Id == condominiumId ).FirstOrDefault();
+                if (matchingCondo != null)
                 {
-                    var allUsers = matchingCondo.Buildings.SelectMany(x => x.Users);
-                    bool userBelongsToOneBuilding = allUsers.Select(x => x.Id).Contains(user.Id);
+                    var allUsers = matchingCondo.Buildings.SelectMany( x => x.Users );
+                    bool userBelongsToOneBuilding = allUsers.Select( x => x.Id ).Contains( user.Id );
                     return userBelongsToOneBuilding;
                 }
 

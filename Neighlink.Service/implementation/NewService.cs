@@ -3,48 +3,45 @@ using System.Collections.Generic;
 using System.Text;
 using Neighlink.Entity;
 using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class NewService : INewService
     {
-        private INewRepository newRepository;
-        public NewService(INewRepository newRepository)
+        private INewRepository _newRepository;
+        public NewService(ApplicationDbContext context)
         {
-            this.newRepository=newRepository;
+            _newRepository = new NewRepository( context );
+        }
+        public void Add(News entity)
+        {
+            _newRepository.Add( entity );
         }
 
-        public NewService()
+        public void Delete(int id)
         {
-        }
-
-        public bool Delete(int id)
-        {
-            return newRepository.Delete(id);
+            _newRepository.Delete( id );
         }
 
         public News Get(int id)
         {
-            return newRepository.Get(id);
+            return _newRepository.GetById( id );
         }
 
         public IEnumerable<News> GetAll()
         {
-            return newRepository.GetAll();
+            return _newRepository.GetAll();
         }
 
-        public bool Save(News entity)
+        public void Update(News entity)
         {
-            return newRepository.Save(entity);
-        }
-
-        public bool Update(News entity)
-        {
-            return newRepository.Update(entity);
+            _newRepository.Update( entity );
         }
         public IEnumerable<News> GetNewsByCondominium(int condominiumId)
         {
-            return newRepository.GetNewsByCondominium(condominiumId);
+            return _newRepository.GetNewsByCondominium( condominiumId );
         }
     }
 }

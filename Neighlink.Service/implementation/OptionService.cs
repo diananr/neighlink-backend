@@ -1,33 +1,41 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
+using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class OptionService : IOptionService
     {
-        public bool Delete(int id)
+        private IOptionRepository _optionRepository;
+        public OptionService(ApplicationDbContext context)
         {
-            throw new System.NotImplementedException();
+            _optionRepository = new OptionRepository( context );
+        }
+        public void Add(Option entity)
+        {
+            _optionRepository.Add( entity );
+        }
+
+        public void Delete(int id)
+        {
+            _optionRepository.Delete( id );
         }
 
         public Option Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _optionRepository.GetById( id );
         }
 
         public IEnumerable<Option> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _optionRepository.GetAll();
         }
 
-        public bool Save(Option entity)
+        public void Update(Option entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(Option entity)
-        {
-            throw new System.NotImplementedException();
+            _optionRepository.Update( entity );
         }
     }
 }

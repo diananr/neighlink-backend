@@ -4,10 +4,10 @@ namespace Neighlink.Repository
 {
     public interface ICrudRepository<T>
     {
-        bool Save(T entity);
-        bool Update(T entity);
-        bool Delete(int id);
-        IEnumerable<T> GetAll();
-        T Get(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(int id);
+        List<T> GetAll();
+        T GetById(int id);
     }
 }

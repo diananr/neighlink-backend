@@ -1,44 +1,46 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
 using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class PaymentCategoryService : IPaymentCategoryService
     {
-        private IPaymentCategoryRepository paymentRepository;
-        public PaymentCategoryService(IPaymentCategoryRepository paymentRepository)
+        private IPaymentCategoryRepository _paymentRepository;
+        public PaymentCategoryService(ApplicationDbContext context)
         {
-            this.paymentRepository=paymentRepository;
+            _paymentRepository = new PaymentCategoryRepository( context );
         }
-        public bool Delete(int id)
+        public void Add(PaymentCategory entity)
         {
-            return paymentRepository.Delete(id);
+            _paymentRepository.Add( entity );
+        }
+
+        public void Delete(int id)
+        {
+            _paymentRepository.Delete( id );
         }
 
         public PaymentCategory Get(int id)
         {
-            return paymentRepository.Get(id);
+            return _paymentRepository.GetById( id );
         }
 
         public IEnumerable<PaymentCategory> GetAll()
         {
-            return paymentRepository.GetAll();
+            return _paymentRepository.GetAll();
         }
 
-        public bool Save(PaymentCategory entity)
+        public void Update(PaymentCategory entity)
         {
-            return paymentRepository.Save(entity);
-        }
-
-        public bool Update(PaymentCategory entity)
-        {
-            return paymentRepository.Update(entity);
+            _paymentRepository.Update( entity );
         }
 
         public IEnumerable<PaymentCategory> GetBuildingsByCondominium(int condominiumId)
         {
-            return paymentRepository.GetBuildingsByCondominium(condominiumId);
+            return _paymentRepository.GetBuildingsByCondominium( condominiumId );
         }
     }
 }

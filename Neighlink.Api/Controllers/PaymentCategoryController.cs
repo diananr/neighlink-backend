@@ -16,37 +16,37 @@ namespace Neighlink.Api.Controllers
         this.paymentCategoryService = paymentCategoryService;
     }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return Ok(
-                paymentCategoryService.GetAll()
-            );
-        }
+        //[HttpGet]
+        //public ActionResult Get()
+        //{
+        //    return Ok(
+        //        paymentCategoryService.GetAll()
+        //    );
+        //}
 
-        [HttpPost]
-        public ActionResult Post([FromBody] PaymentCategory paymentCategory)
-        {
-            return Ok(
-                paymentCategoryService.Save(paymentCategory)
-            );
-        }
+        //[HttpPost]
+        //public ActionResult Post([FromBody] PaymentCategory paymentCategory)
+        //{
+        //    return Ok(
+        //        paymentCategoryService.Save(paymentCategory)
+        //    );
+        //}
 
-        [HttpPut]
-        public ActionResult Put([FromBody] PaymentCategory paymentCategory)
-        {
-            return Ok(
-                paymentCategoryService.Update(paymentCategory)
-            );
-        }
+        //[HttpPut]
+        //public ActionResult Put([FromBody] PaymentCategory paymentCategory)
+        //{
+        //    return Ok(
+        //        paymentCategoryService.Update(paymentCategory)
+        //    );
+        //}
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            return Ok(
-                paymentCategoryService.Delete(id)
-            );
-        }
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    return Ok(
+        //        paymentCategoryService.Delete(id)
+        //    );
+        //}
 
         [HttpGet("by-condominium/{condominiumId}")]
         public ActionResult<IEnumerable<User>> GetBuildings(int condominiumId)

@@ -1,68 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Options;
 using Neighlink.Entity;
 using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.Implementation
 {
     public class UserService : IUserService
     {
-        private IUserRepository userRepository;
+        private IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(ApplicationDbContext context, IOptions<PrivateSettings> settings)
         {
-            this.userRepository = userRepository;
+            _userRepository = new UserRepository( context, settings );
         }
 
-        public User Authenticate(string email, string password)
+        public void Add(User entity)
         {
-            return userRepository.Authenticate(email, password);
+            _userRepository.Add( entity );
         }
 
-        public bool RegisterAdmin(User user, int condominiumId)
+        public void Delete(int id)
         {
-            return userRepository.RegisterAdmin(user, condominiumId);
-        }
-
-        public bool RegisterOwner(User user, int buildingId)
-        {
-            return userRepository.RegisterOwner(user, buildingId);
-        }
-
-        public IEnumerable<User> GetUsersByCondominium(int condominiumId)
-        {
-            return userRepository.GetUsersByCondominium(condominiumId);
+            _userRepository.Delete( id );
         }
 
         public User Get(int id)
         {
-            return userRepository.Get(id);
-        }
-
-        public bool Update(User entity)
-        {
-            return userRepository.Update(entity);
-        }
-
-        public bool Delete(int id)
-        {
-            return userRepository.Delete(id);
-        }
-
-        public bool Save(User entity)
-        {
-           throw new NotImplementedException();
+            return _userRepository.GetById( id );
         }
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAll();
+        }
+
+        public void Update(User entity)
+        {
+            _userRepository.Update( entity );
+        }
+
+        public User Authenticate(string email, string password)
+        {
+            return _userRepository.Authenticate( email, password );
+        }
+
+        public bool RegisterAdmin(User user, int condominiumId)
+        {
+            return _userRepository.RegisterAdmin( user, condominiumId );
+        }
+
+        public bool RegisterOwner(User user, int buildingId)
+        {
+            return _userRepository.RegisterOwner( user, buildingId );
+        }
+
+        public IEnumerable<User> GetUsersByCondominium(int condominiumId)
+        {
+            return _userRepository.GetUsersByCondominium( condominiumId );
         }
 
         public bool UserBelongsToCondominium(User user, int condominiumId)
         {
-            return userRepository.UserBelongsToCondominium(user, condominiumId);
+            return _userRepository.UserBelongsToCondominium( user, condominiumId );
         }
     }
 }

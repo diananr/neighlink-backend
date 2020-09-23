@@ -1,51 +1,161 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Neighlink.Entity;
+using Neighlink.Entity.BuildingModel;
 using Neighlink.Service;
+using Neighlink.Service.implementation;
+using System;
 using System.Collections.Generic;
 
 namespace Neighlink.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route( "api/[controller]" )]
     [ApiController]
-    public class BuildingController:ControllerBase
+    public class BuildingController : BaseController
     {
-        private IBuildingService buildingService;
+        private IBuildingService _buildingService;
 
-        public BuildingController(IBuildingService buildingService)
+        public BuildingController()
         {
-            this.buildingService = buildingService;
+            _buildingService = new BuildingService( context );
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Building building)
+        public ActionResult Post([FromBody] AddCondominiumRequestModel model)
         {
-            return Ok(
-                buildingService.Save(building)
-            );
+            try
+            {
+                var building = new Building()
+                {
+                    CreatedAt = today,
+                    Status = model.Status,
+                    UpdatedAt = today,
+                    Name = model.Name,
+                    Description = model.Description,
+                    NumberOfHomes = model.HomesNumber,
+                    CondominiumId = model.CondominiumId
+                };
+                _buildingService.Add( building );
+                response.StatusCode = StatusCodes.Status200OK;
+                response.Status = "OK";
+                response.Message = "Edificio agregado";
+                return Ok( response );
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = StatusCodes.Status400BadRequest;
+                response.Status = "BAD REQUEST";
+                response.Message = e.Message;
+                return BadRequest( response );
+            }
         }
 
-        [HttpGet("by-condominium/{condominiumId}")]
-        public ActionResult<IEnumerable<Building>> GetBuildings(int condominiumId)
+        [HttpGet( "by-condominium/{condominiumId}" )]
+        public ActionResult GetBuildings(int condominiumId)
         {
-            return Ok(buildingService.GetBuildingsByCondominium(condominiumId));
+            try
+            {
+                var buildings = _buildingService.GetBuildingsByCondominium( condominiumId );
+                response.StatusCode = StatusCodes.Status200OK;
+                response.Status = "OK";
+                response.Result = buildings;
+                return Ok( response );
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = StatusCodes.Status400BadRequest;
+                response.Status = "BAD REQUEST";
+                response.Message = e.Message;
+                return BadRequest( response );
+            }
         }
 
-        [HttpGet("byId/{id}")]
-        public ActionResult<Building> Get(int id)
+        [HttpGet( "{id}" )]
+        public ActionResult Get(int id)
         {
-            return Ok(buildingService.Get(id));
+            try
+            {
+                var buildings = _buildingService.Get( id );
+                response.StatusCode = StatusCodes.Status200OK;
+                response.Status = "OK";
+                response.Result = buildings;
+                return Ok( response );
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = StatusCodes.Status400BadRequest;
+                response.Status = "BAD REQUEST";
+                response.Message = e.Message;
+                return BadRequest( response );
+            }
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Building building)
+        [HttpGet]
+        public ActionResult Get()
         {
-            return Ok(buildingService.Update(building));
+            try
+            {
+                var buildings = _buildingService.GetAll();
+                response.StatusCode = StatusCodes.Status200OK;
+                response.Status = "OK";
+                response.Result = buildings;
+                return Ok( response );
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = StatusCodes.Status400BadRequest;
+                response.Status = "BAD REQUEST";
+                response.Message = e.Message;
+                return BadRequest( response );
+            }
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut( "{id}" )]
+        public ActionResult Put(int id, [FromBody] UpdateBuildingRequestModel model)
+        {
+            try
+            {
+                var building = _buildingService.Get( model.Id );
+                building.Status = model.Status;
+                building.UpdatedAt = today;
+                building.Name = model.Name;
+                building.Description = model.Description;
+                building.NumberOfHomes = model.HomesNumber;
+                building.CondominiumId = model.CondominiumId;
+                _buildingService.Add( building );
+                _buildingService.Update( building );
+                response.StatusCode = StatusCodes.Status200OK;
+                response.Status = "OK";
+                response.Message = "Edificio actualizado";
+                return Ok( response );
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = StatusCodes.Status400BadRequest;
+                response.Status = "BAD REQUEST";
+                response.Message = e.Message;
+                return BadRequest( response );
+            }
+        }
+
+        [HttpDelete( "{id}" )]
         public ActionResult Delete(int id)
         {
-            return Ok(buildingService.Delete(id));
+            try
+            {
+                _buildingService.Delete( id );
+                response.StatusCode = StatusCodes.Status200OK;
+                response.Status = "OK";
+                response.Result = "Edificio borrado";
+                return Ok( response );
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = StatusCodes.Status400BadRequest;
+                response.Status = "BAD REQUEST";
+                response.Message = e.Message;
+                return BadRequest( response );
+            }
         }
     }
 }

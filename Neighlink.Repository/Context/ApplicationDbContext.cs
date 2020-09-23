@@ -22,9 +22,22 @@ namespace Neighlink.Repository.Context
         public DbSet<News> News { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
-        public ApplicationDbContext(DbContextOptions options):base(options)
+
+        public ApplicationDbContext()
         {
 
+        }
+
+        public ApplicationDbContext(DbContextOptions options) : base( options )
+        {
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer( "Server=DESKTOP-R9A5MKD;Database=neighlinkDB;Trusted_Connection=True;" );
+            }
         }
 
         public override int SaveChanges()
@@ -36,13 +49,13 @@ namespace Neighlink.Repository.Context
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             AddTimestamps();
-            return base.SaveChangesAsync(cancellationToken);
+            return base.SaveChangesAsync( cancellationToken );
         }
 
         private void AddTimestamps()
         {
             var entities = ChangeTracker.Entries()
-                .Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted));
+                .Where( x => x.Entity is BaseEntity && ( x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted ) );
 
             foreach (var entity in entities)
             {
@@ -50,44 +63,44 @@ namespace Neighlink.Repository.Context
 
                 if (entity.State == EntityState.Added)
                 {
-                    ((BaseEntity)entity.Entity).CreatedAt = now;
+                    ( ( BaseEntity ) entity.Entity ).CreatedAt = now;
                     //Por defecto todas nuestras entidades se crean con status true
-                    ((BaseEntity)entity.Entity).Status = true;
+                    ( ( BaseEntity ) entity.Entity ).Status = true;
                 }
 
                 if (entity.State == EntityState.Deleted)
                 {
-                    ((BaseEntity)entity.Entity).DeletedAt = now;
+                    ( ( BaseEntity ) entity.Entity ).DeletedAt = now;
                 }
 
-                ((BaseEntity)entity.Entity).UpdatedAt = now;
+                ( ( BaseEntity ) entity.Entity ).UpdatedAt = now;
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Building>()
-            .Property(p =>p.Name)
-            .HasColumnName("Names")
-            .HasMaxLength(50)
+            .Property( p => p.Name )
+            .HasColumnName( "Names" )
+            .HasMaxLength( 50 )
             .IsRequired();
-            
-             modelBuilder.Entity<Building>()
-            .Property(p =>p.NumberOfHomes)
-            .HasColumnName("NumberOfHomes")
-            .HasMaxLength(4)
+
+            modelBuilder.Entity<Building>()
+           .Property( p => p.NumberOfHomes )
+           .HasColumnName( "NumberOfHomes" )
+           .HasMaxLength( 4 )
+           .IsRequired();
+
+            modelBuilder.Entity<PaymentCategory>()
+            .Property( p => p.Name )
+            .HasColumnName( "Names" )
+            .HasMaxLength( 20 )
             .IsRequired();
 
             modelBuilder.Entity<PaymentCategory>()
-            .Property(p =>p.Name)
-            .HasColumnName("Names")
-            .HasMaxLength(20)
-            .IsRequired();
-
-            modelBuilder.Entity<PaymentCategory>()
-            .Property(p =>p.Description)
-            .HasColumnName("Descriptions")
-            .HasMaxLength(30)
+            .Property( p => p.Description )
+            .HasColumnName( "Descriptions" )
+            .HasMaxLength( 30 )
             .IsRequired();
         }
     }
