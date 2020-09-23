@@ -38,6 +38,9 @@ namespace Neighlink.Api
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //services.AddSwaggerGen( config =>
+            // config.SwaggerDoc( "v1", new Swashbuckle.AspNetCore.SwaggerGen.PropertyInfoExtensions.AspNetCore.Swagger.Info() {Title = "Ejemplo del swagger" } ) );
+
             var secretsSection = Configuration.GetSection("PrivateSettings");
             services.Configure<PrivateSettings>(secretsSection);
             //Configurar JWT

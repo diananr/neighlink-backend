@@ -70,6 +70,7 @@ namespace AceptanseCriteria
             testRunner.CollectScenarioErrors();
         }
         
+
         [TechTalk.SpecRun.ScenarioAttribute("El usuario ha registrado su voto para una encuesta determinada.", new string[] {
                 "tag1"}, SourceLine=5)]
         public virtual void ElUsuarioHaRegistradoSuVotoParaUnaEncuestaDeterminada_()
@@ -99,6 +100,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
+
  testRunner.Given("que el usuario se encuentra en la vista \"Encuestas\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
@@ -107,11 +109,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  testRunner.Then("al seleccionar una opcion como respuesta a alguna encuesta , y luego presionar en" +
                         "viar , la aplicación registrara el voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
+
         [TechTalk.SpecRun.ScenarioAttribute("El usuario ha visualizado si su voto ha sido registrado en la aplicación", new string[] {
                 "tag1"}, SourceLine=10)]
         public virtual void ElUsuarioHaVisualizadoSiSuVotoHaSidoRegistradoEnLaAplicacion()
@@ -120,6 +124,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario ha visualizado si su voto ha sido registrado en la aplicación", null, tagsOfScenario, argumentsOfScenario);
+
 #line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -190,6 +195,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 19
  testRunner.Then("la aplicación mostrar una ventana donde permitira editar la respuesta dada por el" +
                         " usuario.La aplicación registrara su nuevo voto.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+
 #line hidden
             }
             this.ScenarioCleanup();

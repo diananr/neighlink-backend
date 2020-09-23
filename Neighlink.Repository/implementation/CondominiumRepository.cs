@@ -5,45 +5,14 @@ using Neighlink.Repository.Context;
 
 namespace Neighlink.Repository.implementation
 {
-    public class CondominiumRepository : ICondominiumRepository
+    public class CondominiumRepository : CrudRepository<Condominium>, ICondominiumRepository
     {
-        private ApplicationDbContext context;
+        private ApplicationDbContext _context;
 
         public CondominiumRepository(ApplicationDbContext context)
         {
-            this.context = context;
-        }
-
-        public bool Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Condominium Get(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<Condominium> GetAll()
-        {
-            try
-            {
-                var result = context.Condominiums.ToList();
-                return result;
-            }catch(System.Exception)
-            {
-                return null;
-            }
-        }
-
-        public bool Save(Condominium entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(Condominium entity)
-        {
-            throw new System.NotImplementedException();
+            Init( context );
+            _context = context;
         }
     }
 }

@@ -1,55 +1,58 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
 using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class BillService : IBillService
     {
-        private IBillRepository billRepository;
+        private IBillRepository _billRepository;
 
-         public BillService(IBillRepository billRepository)
+        public BillService(ApplicationDbContext context)
         {
-            this.billRepository=billRepository;
+            _billRepository = new BillRepository( context );
         }
-        public bool Delete(int id)
+
+        public void Add(Bill entity)
         {
-            return billRepository.Delete(id);
+            _billRepository.Add( entity );
+        }
+
+        public void Delete(int id)
+        {
+            _billRepository.Delete( id );
         }
 
         public Bill Get(int id)
         {
-            return billRepository.Get(id);
+            return _billRepository.GetById( id );
         }
 
         public IEnumerable<Bill> GetAll()
         {
-            return billRepository.GetAll();
+            return _billRepository.GetAll();
         }
 
-        public bool Save(Bill entity)
+        public void Update(Bill entity)
         {
-            return billRepository.Save(entity);
+            _billRepository.Update( entity );
         }
 
-        public bool Update(Bill entity)
+        public IEnumerable<Bill> GetBillsByBuilding(int _buildingId)
         {
-            return billRepository.Update(entity);
+            return _billRepository.GetBillsByBuilding( _buildingId );
         }
 
-        public IEnumerable<Bill> GetBillsByPaymentCategory(int PaymentCategoryId)
+        public IEnumerable<Bill> GetBillsByCondominium(int condominiumId)
         {
-            return billRepository.GetBillsByPaymentCategory(PaymentCategoryId);
+            return _billRepository.GetBillsByCondominium( condominiumId );
         }
 
-        public IEnumerable<Bill> GetBillsByBuilding(int Buildingid)
+        public IEnumerable<Bill> GetBillsByPaymentCategory(int paymentCategoryId)
         {
-            return billRepository.GetBillsByBuilding(Buildingid);
-        }
-
-        public IEnumerable<Bill> GetBillsByCondominium(int CondominiumId)
-        {
-            return billRepository.GetBillsByCondominium(CondominiumId);
+            return _billRepository.GetBillsByPaymentCategory( paymentCategoryId );
         }
     }
 }

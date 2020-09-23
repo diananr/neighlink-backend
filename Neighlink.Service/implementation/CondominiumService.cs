@@ -1,40 +1,41 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
 using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class CondominiumService : ICondominiumService
     {
-        private ICondominiumRepository condominiumRepository;
-        public CondominiumService(ICondominiumRepository condominiumRepository)
+        private ICondominiumRepository _condominiumRepository;
+        public CondominiumService(ApplicationDbContext context)
         {
-            this.condominiumRepository = condominiumRepository;
+            _condominiumRepository = new CondominiumRepository( context );
+        }
+        public void Add(Condominium entity)
+        {
+            _condominiumRepository.Add( entity );
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            _condominiumRepository.Delete( id );
         }
 
         public Condominium Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _condominiumRepository.GetById( id );
         }
 
         public IEnumerable<Condominium> GetAll()
         {
-            return condominiumRepository.GetAll();
+            return _condominiumRepository.GetAll();
         }
 
-        public bool Save(Condominium entity)
+        public void Update(Condominium entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(Condominium entity)
-        {
-            throw new System.NotImplementedException();
+            _condominiumRepository.Update( entity );
         }
     }
 }

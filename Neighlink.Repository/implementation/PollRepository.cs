@@ -1,33 +1,17 @@
 using System.Collections.Generic;
 using Neighlink.Entity.Entity;
+using Neighlink.Repository.Context;
 
 namespace Neighlink.Repository.implementation
 {
-    public class PollRepository : IPollRepository
+    public class PollRepository : CrudRepository<Poll>, IPollRepository
     {
-        public bool Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        private ApplicationDbContext _context;
 
-        public Poll Get(int id)
+        public PollRepository(ApplicationDbContext context)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<Poll> GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Save(Poll entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(Poll entity)
-        {
-            throw new System.NotImplementedException();
+            Init( context );
+            _context = context;
         }
     }
 }

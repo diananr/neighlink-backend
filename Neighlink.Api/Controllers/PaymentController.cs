@@ -16,11 +16,11 @@ namespace Neighlink.Api.Controllers
             this.paymentService = paymentService;
         }
 
-        [HttpPost]
-        public ActionResult Post([FromBody] Payment payment)
-        {
-            return Ok(paymentService.Save(payment));
-        }
+        //[HttpPost]
+        //public ActionResult Post([FromBody] Payment payment)
+        //{
+        //    return Ok(paymentService.Save(payment));
+        //}
 
         [HttpGet("by-condominium/{condominiumId}")]
         public ActionResult<IEnumerable<Payment>> GetPaymentsByCondominium(int condominiumId)
@@ -34,17 +34,17 @@ namespace Neighlink.Api.Controllers
             return Ok(paymentService.Get(id));
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Payment payment)
-        {
-            return Ok(paymentService.Update(payment));
-        }
+        //[HttpPut]
+        //public ActionResult Put([FromBody] Payment payment)
+        //{
+        //    return Ok(paymentService.Update(payment));
+        //}
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            return Ok(paymentService.Delete(id));
-        }
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    return Ok(paymentService.Delete(id));
+        //}
 
         [HttpGet("by-bill/{billId}")]
         public ActionResult<IEnumerable<Payment>> GetPaymentsByBill(int billId)

@@ -1,33 +1,41 @@
 using System.Collections.Generic;
 using Neighlink.Entity;
+using Neighlink.Repository;
+using Neighlink.Repository.Context;
+using Neighlink.Repository.implementation;
 
 namespace Neighlink.Service.implementation
 {
     public class PlanService : IPlanService
     {
-        public bool Delete(int id)
+        private IPlanRepository _planRepository;
+        public PlanService(ApplicationDbContext context)
         {
-            throw new System.NotImplementedException();
+            _planRepository = new PlanRepository( context );
+        }
+        public void Add(Plan entity)
+        {
+            _planRepository.Add( entity );
+        }
+
+        public void Delete(int id)
+        {
+            _planRepository.Delete( id );
         }
 
         public Plan Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _planRepository.GetById( id );
         }
 
         public IEnumerable<Plan> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _planRepository.GetAll();
         }
 
-        public bool Save(Plan entity)
+        public void Update(Plan entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(Plan entity)
-        {
-            throw new System.NotImplementedException();
+            _planRepository.Update( entity );
         }
     }
 }

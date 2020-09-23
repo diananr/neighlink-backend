@@ -70,6 +70,7 @@ namespace AceptanseCriteria
             testRunner.CollectScenarioErrors();
         }
         
+
         [TechTalk.SpecRun.ScenarioAttribute("El usuario revisa el  mural de noticias en la aplicacion.", new string[] {
                 "R5"}, SourceLine=5)]
         public virtual void ElUsuarioRevisaElMuralDeNoticiasEnLaAplicacion_()
@@ -77,7 +78,9 @@ namespace AceptanseCriteria
             string[] tagsOfScenario = new string[] {
                     "R5"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("El usuario revisa el  mural de noticias en la aplicacion.", null, tagsOfScenario, argumentsOfScenario);
+
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -99,6 +102,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
+
  testRunner.Given("que el usuario esta en la seccion de \"Inicio\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
@@ -196,6 +200,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 20
  testRunner.Then("al seleccionar esta opcion , la aplicación mostrara nombre y foto del administrad" +
                         "or del condominio.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+
 #line hidden
             }
             this.ScenarioCleanup();
